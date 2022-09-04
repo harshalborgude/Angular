@@ -1,0 +1,155 @@
+
+
+1) To create angular app : ng new <app-name>
+2) To start app : ng serve -> will start app on 4200 port : http//localhost:4200
+    - to create component : ng generate component <component-name>
+
+3) When we create angular application , app compoenent will be created.
+4) 'app-component' will be called as parent component in the application.
+5) Angular application execution will begin from app component only.
+    files available in app component is :
+    - app.module.ts
+    - app.compoenent.ts  -> contains logic to handle request.
+    - app.compoenent.spec.ts -> Unit testing logic
+    - app.compoenent.html -> Template (presentation logic)
+    - app.compoenent.css -> Styles will be written here.
+
+-----------------------------------------------------------
+
+1) Package.json - file represents configuration file or metadata of the application.
+                - Angular application dependancies will be configured in package.json.
+                - In package.json we will have 'dependancies' and 'dev-dependencies'.
+                - devDependencies are required to develop the application.
+                - normal dependancies are required to run the application.
+                
+                Angular packages :
+                - @angular/core
+                - @angular/common
+                - @angular/compiler
+                - @angular/platform-browser
+                - @angular/platform-browser-dynamic
+                - @angular/form - for form based application
+                - @angular/router - to implement routing.
+                - @angular/http - to access api , to implement rest client
+                - @angular/material
+                - @angular/CLI
+
+                This are lot of packages available and have to configure them in package.json file.
+
+--------------------------------------------------
+tsconfig.json file
+    - this file is used to set config for typescript compiler.
+    - ts compiler will read tsconfig.json and then it compiles all .ts files into .js files.
+    
+------------------------------------------------------
+tslint.json ( lint means review )
+    - this files contains configuration setting for lint tool.
+    - which is used to verify weather typescript file are following set of coding standards are not.
+
+-------------------------------------------------------
+karma.conf.js
+    - this file contains configuration setting for karma tool which is used to execute unit test cases on multiple browsers.
+    - in this file we can do related configuration.
+
+-------------------------------------------------------
+Angular.json :
+    - this files contains configuration setting for angular @Angular/CLI software.
+      which is used for create , compile and run appliction.
+    - it contains setting for homepage (which page should be homepage)-index.html , startup file , css file etc.
+
+---------------------------------------------------------
+src/styles.css :
+    - if u want to apply styles throughout the application , can be configure here.
+
+----------------------------------------------------------
+src/index.html :
+    - this file is home page(startup page) for entire application.
+    - the content of entire application will be displayed in index.html file only , being a single page application.
+
+----------------------------------------------------------------
+Angular app bootstrapping mechanism / start up module in angular:
+    - when we start angular app , app module will start , /app/app.module.ts
+    - app module is called as the startup module.
+    - angular application execution will begin from 'app.module'
+    - the process of executing startup module is called as 'boot strapping' - main.ts
+        syntax : platformBrowserDynamic().bootstrapModule(AppModule)
+
+Steps while starting angular app : (angular application is collection of component like classes in java)
+    - ng serve cmd is used to start angular app , when we execute ng server cmd , it will start "main.ts" file ,
+    - "main.ts" file will start "app.module"(app.module.ts) , app.module contains app.module.ts
+    - "app.module" will start "app.component" 
+    - inside app.component 4 files are there (every component will have these 4 files)
+        - app.component.css : stylesheet
+        - app.component.html : presentation logic
+        - app.component.ts : logic of presentaion - controller (properties and methods)
+            - app.component.spec.ts : unit testing
+    - component is the one portion of webpage.
+
+* how content will be displayed in index.html file ?
+    - inside app.component file , "selector" option is there
+    - selector will have the value , that will be used to invoke the component.
+        selector: 'app-root',
+        templateUrl: './app.component.html',
+        styleUrls: ['./app.component.css']
+    - So whatever componet u want to invoke in index file, see the selector of that component and add that selector in "index.html" file.
+    - To generate component : 
+            : ng generate component <component-name>
+            : ng g c <component-name>
+    - After creating component with above cmd , new component will be created under app parent component.
+    - That new component will be imported in app.module.ts and that component will be added in @ngModule tag.
+    - app.component.html file will contain the selector of the greet component "app-greet"
+    - If we write any styles in the css file of specific component , then it will be applicable only for that component's
+        html file.
+    - To access a component , we will use component selector. We can find component selector tag in component.ts file.
+    - In angular application "src/index.html" file will act as a welcome file.
+    - in src/index.html file , we will write 'App Component' selector so when index.html file is loaded it will access "App Component"
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+    - Component represents certain sectio in webpage.
+    - For Example "Login Form" will be represented by login component.
+    - "Registration form/page" will be represented by "registration component".
+    
+    - login.component.ts file is a typescript class in that we will write a variables and methods to deal with requests.
+
+            properties   ---> To store the data 
+            mthods ---------> to perform action
+        note : In angular application we can create any number of component , but "app component" is the mandatory component.
+
+Q. How to invoke a component in webpage ?
+    - a component can be invoked using 'selector' tag. We can find selector tag in component.ts file.
+
+Q. How to represent typescript class as a component?
+    - To represent typescript class as a component we will use "@Component" decorator
+    
+Q. Syntax to create a component ?
+    -> to create component , it will automatically done by cmd by mannually also can create,
+
+    Syntax :
+    --------------------
+    import {Component} from "@angular/core";    // @angular/core is a package which contains Component decorator. 
+
+    @Component
+    class className{
+        property:dataType = value;
+        method(args) : returnType {
+            //logic
+        }
+    }
+
+    Metadata properties of @Component
+    -----------------------------------
+    @Component({
+        selector : 'app-root',
+        templateUrl : './app.component.html',
+        styleUrl : ['./app.component.css']
+    })
+
+    -> 'selector' represents a tag which invokes the component.
+    -> 'templateUrl' represents html file that has to be rendered , when component is invoked.
+    -> 'styleUrl' represents css styles that should be loaded for template.
+
+------------------------------------------------------------------------------------
+
+
+

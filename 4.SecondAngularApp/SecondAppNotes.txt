@@ -1,0 +1,22 @@
+
+
+
+* Data Binding :
+    - Data binding is a technique which is used to establish relation between "component" and "template".
+        - Component is a typescript class.
+        - template is a html file
+    - By using data binding technique , we can send data from component class to template file and vice versa.
+                            DataBinding
+        Component class <---------------> Template
+    - If "component" is changed then "template" will change automatically , if "template" is changed then the "component" will be changed automatically.
+    - Data Bindings are four types :
+        1) Interpolation 
+        2) Property Binding
+        3) Event Binding
+        4) Two way Binding
+        -----------------------
+        1) Interpolation : 
+            - Used to display variable/property/field value in template.
+            - If variable/property value change then it will be immediately updated in template.
+
+            Syntax : {{ proprty Name }}
