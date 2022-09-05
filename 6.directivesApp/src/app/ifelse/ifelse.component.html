@@ -1,0 +1,14 @@
+
+<div>
+    <h4>ngIfElse - Directive</h4>
+
+    <div *ngIf="status;then template1;else template2">
+
+    </div>
+    <ng-template #template1>
+        <h4>Congratulation!</h4>
+    </ng-template>
+    <ng-template #template2>
+        <h4>Better Luck Next Time!</h4>
+    </ng-template>
+</div>

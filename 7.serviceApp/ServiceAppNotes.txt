@@ -1,0 +1,24 @@
+Cmd : ng generate service Welcome / ng g service Welcome
+
+
+Services : 
+    - Service is a class which contains re-usable bussiness logic.
+    - Multiple component classes can access service class , which contains business logic.
+    - We will decorate service class with @Injectable annotation so that other classes can access
+        service class using @Inject annotation.
+    
+    ex :
+        @Injectable
+        public class UserService{
+            //business logic
+        }
+        // This component will make use of service
+        public class ComponentOne{ 
+            @Inject UserService;
+             //business logic
+        }
+        // This component will make use of service
+        public class ComponentTwo{
+            @Inject UserService;
+             //business logic
+        }

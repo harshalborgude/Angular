@@ -1,0 +1,17 @@
+
+<h4>ngFor - Directives with objects data!</h4>
+
+<div>
+    <table border="1">
+        <tr>
+            <th>Emp ID</th>
+            <th>Emp Name</th>
+            <th>Salery</th>
+        </tr>
+        <tr *ngFor="let emp of emps">
+            <th>{{emp.empid}}</th>
+            <th>{{emp.empname}}</th>
+            <th>{{emp.salery}}</th>
+        </tr>
+    </table>
+</div>

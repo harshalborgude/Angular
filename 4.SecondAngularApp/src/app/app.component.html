@@ -1,3 +1,18 @@
 
 <!-- Interpolation :- this msg variable takes value from app.module.ts file called interpolation -->
-<h1>{{msg}}</h1>
+<!-- <h1>{{msg}}</h1> -->
+
+
+<div>
+  <h4>Two-ways Data Binding Example</h4>
+  Name :: {{name}}<br/>
+  Age  :: {{age}}
+
+  <hr/>
+
+  Name :: <input type="text" [(ngModel)]="name"> <br/>
+  Age :: <input type="text" [(ngModel)]="age"><br/>
+
+  <input type="button" value="Submit" (click)="handleSubmitBtn()">
+
+</div>

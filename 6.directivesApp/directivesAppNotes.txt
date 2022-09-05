@@ -1,0 +1,57 @@
+
+Directives : 
+
+    - Directives are used to manipulate DOM elements.( Document Object Model )
+    - Angular have several predefined Directives.
+        1) Style
+        2) ngClass
+        3) ngFor
+        4) ngIf and else
+        5) ngSwitch
+        6) ngFor  
+    
+-------------------------------------------------------------------------------------------------------------------
+    1) Style : style directive is used to set CSS property value dynamically at runtime.
+                - When value of the component property is changed the value of the css property will be changed automatically.
+    2) ngClass : ngClass directive is used to set CSS class name dynamically at runtime.
+                - this directive is used to set styles with multiple properties , conditionally at runtime.
+    3) ngIf : ngIf is used to display an element when condition is 'true'.
+    4) ngIf and else : ngIf and else is used to display one element when condition is true and 
+                        display another element when condition is false.
+    5) ngSwitch : ngSwitch is used to display content based on variable value matched with a case.
+    6) ngFor : ngFor is used to execute logic repeatedly based on some condition.(in a loop)
+
+--------------------------------------------------------------------------------------------------------------------
+
+1) Style : refer style component 
+            - [style.color]="mycolor"  : this will assign mycolor vars color to that perticular tag.
+            
+2) ngClass : refer class-dir component
+            - [ngclass] = "myclass"  : this way we can assign a css class var to tag.
+
+3) ngIf / ngIf and else :  refer ifelse-dir component 
+            - here status is the boolean value.
+            <div *ngIf="status;then template1;else template2">
+            </div>
+            <ng-template #template1>
+                <h4>Congratulation!</h4>
+            </ng-template>
+            <ng-template #template2>
+                <h4>Better Luck Next Time!</h4>
+            </ng-template>
+
+4) ngFor :   refer ngfor component , ngforobject
+            - It is used to repeat the tag once for each element in the array.
+            - We have to prefix "*" before ngFor directives.
+            - The same way we can access Objects also.
+
+            Ex : arrayName = [val1, val2, val3...]
+
+            <tag *ngFor = "let var of arrayName">
+                {{ var }}
+            </tag>
+
+
+=========================================================================================
+
+

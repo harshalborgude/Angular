@@ -1,0 +1,61 @@
+Login Page Development 
+----------------------------------------------------------------
+Requirement : Develop Angular Application with Login Screen
+----------------------------------------------------------------
+1) Create Angular Application using below cmd :
+    - ng new 5.LoginApp
+2) Import "Forms Module" in app.module.ts file
+3) Write properties and methods related to login screen template in app.component.ts file.
+4) Write presentation login in app.component.html file.
+5) Run Angular Application using below cmd 
+    - ng serve
+6) Open browser and acess below url. : http://localhost:4200
+
+Solution : 
+    - in "app.module.ts" import FormsModule to take imputs of forms.
+    - declare 3 vars in app.component.ts , username , password , msg
+    - define method CheckLogin(); to check weather credentials are right or not with if condition.
+    - in "app.component.html" create a form component enclosed in div tag.
+    - in html template , take all the inputs with input tag.
+        Username : <input type="text" [(ngModel)]="username" name="username"> <br/>
+    - here [(ngModel)]="username" will bind this property username with username variable of component.ts file.
+        Password : <input type="password" [(ngModel)]="password" name="password"> <br/>
+    - here [(ngModel)]="password" will bind this property password with password variable of component.ts file.
+        <input type="submit" value="Login" (click)="CheckLogin()" /> <br/> 
+    - on click event , with the help of eventBinding , CheckLogin() function will be called.
+    - with the above property binding , we can just values of those inputs in component.ts file with the same vars.
+    - ngModel will take care of binding component.ts var and component.html input tag with each other.
+    - now we can process both the inputs as per required , we can pass those values to Rest API's for validation , and upon response routing to another page can be done.
+
+-----------------------------------------------------------------
+Requirement 2 : Develop Angular Application with Registration page (RegistrationPageBlueprint.png)
+-----------------------------------------------------------------
+1) Have added this page as a part of loginApp itself as a separate component , This component's selector have added 
+    at the end of app.component.html.
+2) Need to import FormsModule (import {FormsModule} from "@Angular/forms")
+3) in Registration.component.ts have added all the required properties.
+        username:string = "";
+        password:string = "";
+        confirmpassword:string = "";
+        gender:string = "";
+        country:string = "";
+        msg:string = "";
+
+4) write method to handle register button click event : CheckRegistractionDetails(){}
+5) write presentation logic in Registration.component.html file , bind them with proper properties.
+
+
+
+===========================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
