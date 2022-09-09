@@ -1,0 +1,78 @@
+// import { Observable, of } from 'rxjs';
+
+
+1) We can handle asynchronous operations using "Observables" or "Promises".
+2) Synchronous code is blocking in nature , asynchronous code is non blocking , It runs in background , like to get data from http requests.
+3) Diff between Observables and Promises,
+                        Observable                          |                            Promise
+    1) Observable will not return complete data ,           |        1) Promise return us all the data at once.Promise promises us a data and 
+       It streams the data so it will send in chunks/packets|            provides us over period of time.Promise returns a data when complete 
+                                                            |            data is collected , It can be a error also.
+    2)  Observable only provide data if code is using It    |        2) It will give all data even If no code using that data.
+    3)  Observable is not native feature of javscript , it  |        3) Promise is the native feature of javaScript.   
+        It is provided by another javaScript library RxJs   |        
+    4) Observable is a function that converts ordinary      |
+        Stream of data into Observable stream.              |
+    5) Have 2 parts , Observable(stream of data) and Subscriber (Observer) , Observer have to Subscribe that Observable.    
+
+4) To use Observable , we need RxJs library , that will automatically get install when we create angular project.
+5) To Create new Observable object , have to pass a callback function to its constructor, Observer will only emit the data if there is subscriber.
+    so data will be streamed to subscriber one by one.
+    
+    // Creating Observable using Observable constructor.
+    myObservable = new Observable((observer) =>{
+        observer.next("1");
+        setTimeout(()=>{observer.next("2")},1000);
+    });
+
+    - setTimeout(callBackFunc, timeInterval-ms);
+
+6)  To Create Subscriber for Observable, It accepts 3 params - observable.subscribe( next(val) , error(error) , completed() ).(optional)
+    - Subscriber will recieve a data one by one in streams.
+    - first callback func get executed when it recieves "value" , second gets executed when it recieves "error" , third gets executed when data "completed"
+    - Inside each call back func we can write handling logic of it, So there we can handle error also.
+    - complete func will not recieve any value.
+
+        this.myObservable.subscribe((val) => {
+            console.log(val);
+            }, (error) => {
+            alert(error.message);
+            }, () => {
+            alert("Observable has completed emmiting values!");
+        });
+   
+7) Observable also emit "errors" and "signal" of data completion. 
+    - after error no value will be emitted.
+    - After complete signals , Observable will not emmit any value.
+
+        observer.error(new Error("Something went wrong, Plz try again!"))
+        observer.complete()
+
+====================================================================================================================
+Different Ways of creating Observables :
+
+1) Using Observable constructor : new Observable( (observer)=>{observer.next()} );
+2) Using Create method :  Observable.create( (observer)=>{observer.next()} );
+3) Creating Observable Using "of()" :
+    - This of operator will emmit complete signal by itself.No need of explicite emision of complete signal.
+    - of can take n number of arguments
+    - of will take all iterables and values , and it emmits all the values as it is.
+    
+    myObservable = of( this.array1, this.array2, 20, 79, "Hello");
+
+4) 4) Creating Observable Using "from()" :
+
+    - from will accept only 1 arguments , 
+    - It iterates the over the iterable and emmits those values 1 by 1.
+    - We can convert "Promise" to "Observable" using from operator.
+
+    myObservable = from( this.array1);
+
+
+
+
+
+
+
+
+

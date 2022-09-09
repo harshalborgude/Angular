@@ -15,7 +15,7 @@ Building Blocks of angular :
     4) DataBinding : Connection bewteen HTML elements and component properties
     5) Module : Group of components , directives and pipes
     6) Service : Re-usable business logic
-    7) Dependency Injection : Injecting Objects / process of injective one object into another object.
+    7) Dependency Injection : Injecting Objects / process of injecting one object into another object.
     8) Directives : To manipulate DOM elements.
     9) Pipes : Transforming values before displaying.
     10) Routings : Routings are used to navigate from 1 page to another page. 

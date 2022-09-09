@@ -1,0 +1,8 @@
+.container {
+    width : 720px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: af4f4f4;
+    display: flex;
+
+}

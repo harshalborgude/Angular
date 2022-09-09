@@ -1,0 +1,37 @@
+
+Forms : Refer "example1" component
+-----------------------------------------------------------------------------------------------------------------
+1) Forms are widely used in applications for collecting information from the user.
+	- Login Form
+	- Registration Form
+	- Forgot Password Form
+	- Seach Form 
+	- Update Profile etc...
+
+-> using angular we can develop forms in 2 ways 
+	1) Template-Driven forms - Can be used for simple form validations , validation taken care on template side
+	2) Reactive Forms	- Can be used for complex form validations , validation taken care by component class.
+
+-> Both approaches of angular forms have few common building blocks 
+Holding the follow attributes :
+	- FormControl : It is used mainly for monitoring user input and authenticate that data.
+	- FormGroup : It is used to track the same values and authentication status for collection of FormControl.
+	- FormArray : It tracks the same values and status for array of form control.
+
+-------------------------------------------------------------------------------------------------------------------
+Template Driven Approach 
+-------------------------------------------------------------------------------------------------------------------
+-> As its name , it is a form that is declared and validated on template side(HTML).
+-> The Angular framework provided an intresting mechanism named "ngModel"
+-> Using this ngModel directive we can achieve two-way data binding.
+
+-------------------------------------------------------------------------------------------------------------------
+Steps for Forms :
+1) Create angular applications : ng new <app-name>
+2) Create Required properties in component class for form binding.
+3) Develop Presentation logic in template file - HTML
+4) Run application : ng serve
+
+
+
+

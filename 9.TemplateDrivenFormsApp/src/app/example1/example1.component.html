@@ -1,0 +1,48 @@
+<p>Example 1:</p>
+<form #myForm="ngForm">
+
+    First Name :
+    <input  type="text" 
+            [(ngModel)]="fname" 
+            name="fname" 
+            required="required" 
+            #control1="ngModel"/> 
+    
+      <!-- Form Validation Logic -->
+      <span class="error" *ngIf="control1.touched&&control1.invalid && control1.errors">
+          First Name Is Mandatory
+      </span>
+            
+    <br/>
+
+    Last Name :
+    <input  type="text" 
+            [(ngModel)]="lname" 
+            name="lname"
+            required="required"
+            #control2="ngModel"/> 
+
+      <span class="error" *ngIf="control2.touched&&control2.invalid && control2.errors">
+        Last name is also mandatory!
+      </span>
+                  
+    <br/>
+    Email ID:
+    <input  type="email" 
+            [(ngModel)]="email" 
+            name="email" 
+            required="required"
+            #control3="ngModel"> 
+    
+      <span class="error" *ngIf="control3.touched && control3.invalid && control3.errors">
+        Email id is Mandatory
+      </span>
+    <br/>
+
+    <input type="submit" value="Save" (click)="saveUser(myForm)" name="save" id="">
+
+    <div class="msg" [style.color]="msgColor">
+      {{msg}}
+    </div>
+
+  </form>

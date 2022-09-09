@@ -1,1 +1,8 @@
-<p>ngswitch works!</p>
+<h4>ngSwitch - Directive</h4>
+
+<Div class="container" [ngSwitch]="occupation">
+    <p *ngSwitchCase="'teacher'">This paragraph will be displayed when occupation is teacher</p>
+    <p *ngSwitchCase="'designer'">This paragraph will be displayed when occupation is designer</p>
+    <p *ngSwitchCase="'lawyer'">This paragraph will be displayed when occupation is Lawyer</p>
+    <p *ngSwitchDefault>This paragraph will be displayed when when no value matches - Dafault value</p>
+</Div>

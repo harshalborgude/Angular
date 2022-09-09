@@ -1,0 +1,11 @@
+<h1>Welcome to Angular - Reactive Forms!</h1>
+
+<form [formGroup]="myForm">
+  First Name : <input type="text" formControlName="fname"> <br/>
+  Last Name : <input type="text" formControlName="lname"> <br/>
+  Email : <input type="email" formControlName="emain"> <br/>
+
+  <input type="button" value="Save" (click)="onSubmit()">
+  <br/>
+  {{msg}}
+</form>

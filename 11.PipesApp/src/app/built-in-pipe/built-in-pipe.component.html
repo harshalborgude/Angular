@@ -1,0 +1,11 @@
+<h1>Built - in pipe</h1>
+<div>
+    <p>Date : {{ whatDate  }}</p>
+    <p>DatePipe : {{ whatDate | date | uppercase }}</p>
+    <p>DatePipe : {{ whatDate | date | lowercase }}</p>
+    <p>DatePipe : {{ whatDate | date: 'shortTime' }}</p>
+    <p>DatePipe : {{ whatDate | date: 'mm/dd/yyyy' }}</p>
+
+    <p>textUpper : {{ text | uppercase }}</p>
+    <p>textLower : {{ text | lowercase }}</p>
+</div>

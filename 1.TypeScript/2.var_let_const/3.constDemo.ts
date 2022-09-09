@@ -5,7 +5,7 @@
     - we can't modify the value for 'const' variables in JS/TS.
     
     - initialization of const variable is mandatory , cant initialize that later.
-    - it can't be modied once it's initialized.
+    - it can't be modified once it's initialized.
 
 */
 

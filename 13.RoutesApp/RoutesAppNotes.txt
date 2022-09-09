@@ -1,0 +1,72 @@
+
+Routing in angular
+-----------------------------------------------------
+1) Create app and all the components , in app.component.html file add all navigation tabs and all components.
+2) In "app.module.ts" file create const "appRoute:Routes" with the path and its component. 
+        const appRoute: Routes = [
+            {path:"Home",component: HomeComponent}
+        ]
+
+3) Import RouterModule,Routes from @angular/router. -> (import { RouterModule, Routes } from '@angular/router';)
+4) in imports of RouterModule , call "RouterModule.forRoot(appRoute)" method with "appRoute" const , so using this now our application knows about all the routes using this.
+5) Instead components selectors in "app.component.html" file user "<router-outlet></router-outlet>" this directive. (this directive is of ROuterModule so its already imported in app.module)
+6) So now with "http://localhost:4200/Home" this url it will "show home page", and same for "/Contact","/Course","/About"
+7) With this "http://localhost:4200/" only navigation tabs getting displayed , No any page is there so , in appRoute const , have to add 1 route for root route so,
+    {path:"",component:HomeComponent}
+    - so Default component will be "HomeComponent"
+    - This is called as Default Route.
+            OR 
+     {path:"",redirectTo:"Home",pathMatch:'full'},
+    - This is the another way of routing to Default "Home" path.
+    - So with this approach , when we try to get root url , we will redirected to "/Home"
+8) To handle error we have to add wildcard routes .
+        {path:"**",component: ErrorComponent}  -> "app.module.ts"
+    - This is called as wildcard routes.This is the default route , if not matches with any other route.
+    - wildcard route should always be the last route in route list, bcz this matches every route path.
+
+9) To connect this routes with navigation button , Have to add its route path in "href" , so with base url it will append that page Name and will be routed to that page.
+     <li><a href="Home">Home</a></li>
+    - Here after clicking "Home" tag , url will become "http://localhost:4200/Home".
+
+
+==========================================================================================================================
+navigation Link for Router : "routeLink"
+
+    1) Instead of "href" for routing to another page  , we should be using "routerLink"
+        <li><a routerLink="Home">Home</a></li>
+        - By this way , whole app will not be restarted / refresh, only that component wil be rendered.
+
+    2) Other ways to mention routerLink is , using below way of array , we can pass paramters to component.
+        <li><a [routerLink]="'About'">About</a></li>
+		<li><a [routerLink]="['Contact']">Contact</a></li>
+
+============================================================================================================================
+ Styling Active Link using "routeLinkActive" : To highlight active route.
+ 
+    - the active page/link will be highlighted in different fashion.
+    - To do that have create 1 CSS class in style.css file "active" class 
+    - ANd in "component.html" file , added "routerLinkActive" directive , which refers to css class.
+        <li routerLinkActive="active"><a routerLink="Home">Home</a></li>
+
+    - This way multiple classes can be assigned.
+        <li [routerLinkActive]="'active' 'class2'"><a routerLink="Home">Home</a></li>
+
+    - now whatever navigation button we press , that will have css properties of "active" class.
+    - WHen we are using root path as a "" then it becomes parent to all other routes , So it will be "active" all the time when child routes are open.
+    - When child is active then parent route is also active , So both will show active status,
+    - So home page will show active all the time , to avoid that , use ([routerLinkActiveOptions]="{exact : true}")
+
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}"><a routerLink="">Home</a></li>
+
+    - 
+
+
+
+
+
+
+
+
+
+
+

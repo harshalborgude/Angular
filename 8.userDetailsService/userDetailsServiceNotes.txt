@@ -1,0 +1,35 @@
+Requirement : to create 2 diff independent services , 1 to add user details and list them and 2nd to show details.
+------------------------------------------------------------------------------------------------------------------
+
+1) Here created 2 components and 1 service: components are independent
+    1) all-users : will display all the user list on left hand side with "details" button.
+    2) user-details : on click of "details" button , this should show that specific users details.
+    3) user-service : have "users" objects which contains details of all the objects.
+
+2) userService have added in provider of app components and created instance in constructor of app components.
+    so this instance will be available to all the child components - allUsers and userDetails
+3) Have created instance of userService in both the components so can be accessed same instance.Providers
+    have not provided , as it will create different instance then.
+
+4) On click of showDetails button from all-users component , it will call "ShowUserDetails" methods of user-details service
+    with the data of that specific user.
+5) This will emitt the data of the user in service class , and will trigger a eventEmitter "onShowDetailsClicked" with the same data.
+6) In user-details component , it will subscribe that eventEmitter , and get the data and will assign that data to the "user" property of user-details
+7) In user-details template file , it will show data of that perticular user , using string interpolation.
+8) In "userDetails" template , condition is mentioned to show user details only if value of user is not "undefined".
+    *ngIf="user != undefined"
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+

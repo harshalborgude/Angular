@@ -1,0 +1,20 @@
+
+Reactive Forms ( Model Driven Approach )
+-----------------------------------------------------------------------------
+- Reactive Forms are called as Model Driven Forms
+- In Reactive Forms,  Forms logic will be available in component class.
+- To develop Reactive Forms , we have to import "Reactive Forms" module.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

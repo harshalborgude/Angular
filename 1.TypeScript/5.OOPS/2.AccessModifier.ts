@@ -30,7 +30,7 @@ interface InterfaceName {
     method(args) : returnType;
 }
 
-Implementatio class for interface
+Implementation class for interface
 class className implements InterfaceName {
     property : dataType;
     method(args) : returnType {
