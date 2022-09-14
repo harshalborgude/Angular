@@ -2,7 +2,7 @@
 /*
  1) var : keyword have issue that , var variables's value will get modified out of the loop also if any function will not be there, 
         it will modify the value of same named var which is outside the scope. (refer case 2)
-    -> to overcome this issue of var keyword , let is introduced.
+    -> to overcome this issue of var keyword , "let" is introduced.
     -> var consider only function scope , didn't consider block scope.
 */
 

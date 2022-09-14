@@ -1,5 +1,6 @@
 import { EventEmitter } from "@angular/core"
 
+
 export class UserService {
     users = [
         {name:'John',job:'Teacher',gender:'Male',country:'United States',age:34,avater:'assets/avater/john.jpg'},

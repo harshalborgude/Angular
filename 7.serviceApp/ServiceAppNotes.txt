@@ -23,7 +23,7 @@ Services :
         @Injectable
         public class UserService{
 
-            constructor(@Inject(WelcomeService) private s:WelcomeService){ }
+            constructor( private welcomeService : WelcomeService ){ }
             // As here in "UserService" we are injecting WelcomeService so it have @Injectable decorator.
             //business logic
         }
@@ -43,7 +43,7 @@ Services :
     - or we have to add that service in "providers" of that specific component where we are making use of it in @Component decorator.
         By this way that coponent will get to know the required dependancies to be injected.
     - While importing in any other component , 
-            constructor(@Inject(WelcomeService) private s:WelcomeService){ }
+            constructor( private welcomeService : WelcomeService ){ }
 
     - This injected service methods we can access now in our component or can be accessed in all the child components also,just have to get 
         instance of that service with constructor as above.
@@ -61,10 +61,10 @@ Services :
         - Now in "app.module" , providers are there for UserService.So same instance is available for all child components.
         - "display module" is accessing instance of "UserService" using constructor. so parent and display component shares same object.
         - but in "add component" we have "providers" of "UserService" and getting instance of "UserService" with constructor.So add component have 
-            diff instance of "UserService" that parent and "display component".
+            diff instance of "UserService" than parent and "display component".
         - So in "display component" it will show diff data , whichever data we are adding using "add component" will be added to diff instance 
             and that will not be displayed as both are diffent instances.
-        - So this kind of bugs can be created in hierarchical dependancy injection can not be implemented properly.
+        - So this kind of bugs can be created in hierarchical dependancy injection ,if can not be implemented properly.
         - We should always use same instance for depenent components.
 
 

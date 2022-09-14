@@ -1,0 +1,436 @@
+
+
+1) What is the difference between AngularJS and Angular?
+		Angular 						AngularJS
+	1) Uses TypeScript				1) Was using JavaScript
+	2) CLI tool is available		2) CLI tool was not there
+	3) Cross compatibility			3) Was not cross compatibile.
+	
+2) Advantages of using angular 
+	- Angular supports two-way data-binding.
+	- It also supports RESTfull services.
+	- Validations are supported in Angular.
+	- It provides support for dependency injection.
+	- It follows MVC pattern architecture.
+	- It supports static templates and Angular template.
+	- It facilitates you to add a custom directive.
+	- Angular provides client and server communication.
+	- It provides powerful features like Event Handlers, Animation, etc.
+	
+3) What are templates in Angular?
+	In Angular, templates contain Angular-specific elements and attributes. These are written with HTML and combined with information coming from the model and 
+	controller, which are further rendered to provide the user's dynamic view.
+	
+4) What is the difference between an Annotation and a Decorator in Angular?
+	In Angular, annotations are the "only" metadata set of the class using the Reflect Metadata library. They are used to create an "annotation" array. On the 
+	other hand, decorators are the design patterns used for separating decoration or modification of a class without actually altering the original source code.
+
+5) Why is Angular preferred over other frameworks? / What are some advantages of Angular over other frameworks?
+	Due to the following features, Angular is preferred over other frameworks:
+	- Extraordinary Built-in Features : Angular provides several out of the box built-in features like routing, state management, RxJS library, Dependency 
+										Injection, HTTP services, etc. That's why the developers do not need to look for the above-stated features separately.
+	- Declarative UI : Angular has declarative UI. It uses HTML to render the UI of an application as it is a declarative language. It is much easier to use than
+						JavaScript.
+	- Long-term Google Support : Angular is developed and maintained by Google. Google has a long term plan to stick with Angular and provide support.
+
+6) What are the different Lifecycle hooks of Angular? Explain them in short.
+	When the Angular components are created, they enter their lifecycle and remain when they are destroyed. Angular Lifecycle hooks are used to check the phases
+	and trigger changes at specific phases during the entire duration.
+	
+	Constructor :
+	1) ngOnChanges : This method is called when one or more input properties of the component are changed. The hook receives a SimpleChanges object containing 
+					the previous and current values of the property.
+					
+		5)  ngAfterContentinit	: This hook is called after the first ngDoCheck hook. This hook responds after the content gets projected inside the component.
+		6) ngAfterContentChecked : This hook is called after ngAfterContentInit and every subsequent ngDoCheck. It responds after the projected content is checked.
+		7) ngAfterViewInit : This hook is called after a component's view or initializing a child component's view.
+		8) ngAfterViewChecked : This hook is called after ngAfterViewInit. It responds after the component's view or when the child component's view is checked.
+		
+	2) ngOnInit : This is the second lifecycle hook. It is called once, after the ngOnChanges hook. It is used to initialize the component and sets the input 
+					properties of the component.
+	3) ngDoCheck : This hook is called after ngOnChanges and ngOnInit and is used to detect and act on changes that Angular cannot detect. In this hook, we can
+					implement our change detection algorithm.
+	4) ngOnDestroy : This hook is called just before Angular destroys the component. This is used to clean up the code and detach event handlers.
+	
+7) What is AOT in Angular?
+	In Angular, AOT stands for Ahead-Of-Time compiler. It is used to convert your Angular HTML and TypeScript code into efficient JavaScript code during the 
+	build phase before the browser downloads and runs that code. By compiling the application during the build process provides a faster rendering in the browser.
+	
+8) What is the reason for using the AOT compiler in Angular?
+	An Angular application is made of several components and their HTML templates. Because of these Angular components and templates, the browsers are not able 
+	to understand them directly. So, Angular applications require a compilation process before they run in a browser. That's why AOT compilers are required.
+	
+9) What are the biggest advantages of AOT in Angular?
+	Following are the advantages of using the AOT compiler in Angular:
+	
+	- The rendering is faster :-  When we use the AOT compiler, the browser gets a pre-compiled version of the application to download. Here, the browser loads 
+									executable code to render the application immediately, without waiting to compile the app first.
+	- The Angular framework's download size is smaller :-  AOT facilitates you not to download the Angular compiler if the app is already compiled. The compiler 
+															is roughly half of Angular itself, so omitting it dramatically reduces the application payload.
+	- Fewer asynchronous requests :-  The compiler is used to inline external HTML templates and CSS style sheets within the application JavaScript so, it 
+										eliminates separate AJAX requests for those source files.
+	- Detect template errors earlier :-  While using the AOT compiler, developers can easily detect and report template binding errors during the build step 
+											before users can see them.
+	- Better security :- AOT provides better security because it compiles HTML templates and components into JavaScript files before they are served to the 
+						client. Because there are no templates to read and no risky client-side HTML or JavaScript evaluation, so the chances for injection 
+						attacks are very rare.
+						
+10) What is JIT in Angular?
+	In Angular, JIT stands for Just-in-Time compiler. The JIT compiler provides a dynamic translation or run-time compilation, which provides a way of executing
+	computer code that involves compilation during the execution of a program at run time rather than before execution.
+
+11) What is the main difference between JIT and AOT in Angular?
+	Following are the main differences between JIT and AOT compiler in Angular:
+
+	- Just-in-Time (JIT) compiler compiles our app in the browser at run-time while Ahead-of-Time (AOT) compiler is used to compile your app at build time on 
+		the server.
+	- The JIT compilation runs by default when you run the ng build (build only), or ng serve (build and serve locally) CLI commands. This is used for development.
+		On the other hand, we have to include the --aot option with the ng build or ng serve command for AOT compilation.
+	- JIT and AOT are both two ways used to compile code in an Angular project. JIT compiler is used in development mode while AOT is used for production mode.
+	- JIT is easy to use. We can easily implement features and debug in JIT mode because here we have a map file while AOT does not. On the other hand, 
+		the biggest advantage of using AOT for production is that it reduces the bundle size for faster rendering.
+
+12) What is the concept of scope hierarchy in Angular?
+	Angular provides the $scope objects into a hierarchy that is typically used by views. This is called the scope hierarchy in Angular. It has a root scope 
+		that can further contain one or several scopes called child scopes.
+	In a scope hierarchy, each view has its own $scope. Hence, the variables set by a view's view controller will remain hidden to other view controllers.
+		Root $scope  
+		$scope for Controller 1  
+		$scope for Controller 2  
+
+13) Diff between Observables and Promises,
+                        Observable                          |                            Promise
+    1) Observable will not return complete data ,           |  1) Promise return us all the data at once.Promise promises us a data and 
+       It streams the data so it will send in chunks/packets|       provides us over period of time.Promise returns a data when complete 
+                                                            |       data is collected , It can be a error also.
+    2)  Observable only provide data if code is using It    |  2) It will give all data even If no code using that data.
+    3)  Observable is not native feature of javscript , it  |  3) Promise is the native feature of javaScript.   
+        It is provided by another javaScript library RxJs   |   
+    4) Lazy. An observable is not called until we subscribe |  4) Not Lazy
+        to the observable.                                  |  
+    5) We can cancel it by using the unsubscribe() method.  |  5) We can not cancel it.                              |
+    6) Observable is a function that converts ordinary      |
+        Stream of data into Observable stream.              |
+    7) Have 2 parts , Observable(stream of data) and Subscriber (Observer) , Observer have to Subscribe that Observable.    
+
+14) What are directives in Angular?
+	A directive is a class in Angular that is declared with a @Directive decorator. Every directive has its own behavior, and you can import them into various 
+	components of an application.
+	
+15) What is Angular CLI?
+	Angular CLI is a short form for Angular Command Line Interface. It is a command-line interface to scaffold and build angular apps using node.js style modules.
+	To use Angular CLI, we have to install it by using the following npm command : npm install @angular/cli@latest  
+
+16) What is lazy loading in Angular?
+	Lazy loading is one of the most powerful and useful concepts of Angular Routing. It makes the web pages easy to download by downloading them in chunks 
+	instead of downloading everything in a big bundle. Lazy loading facilitates asynchronously loading the feature module for routing whenever required using 
+	the property loadChildren.
+	
+	See the following example where we are going to load both Employee and Order feature modules lazily.
+
+		const routes: Routes = [  
+		  {  
+			path: 'employees',  
+			loadChildren: () => import('./employees/employees.module').then(module => module.EmployeesModule)  
+		  },  
+		  {  
+			path: 'orders',  
+			loadChildren: () => import('./orders/orders.module').then(module => module.OrdersModule)  
+		  },  
+		  {  
+			path: '',  
+			redirectTo: '',  
+			pathMatch: 'full'  
+		  }  
+		];  
+	
+17) What is Angular Router?
+	Angular Router is a mechanism that facilitates users to navigate from one view to the next as users perform application tasks. It follows the concept model 
+	of browser's application navigation.
+	
+18) What do you understand by the router imports?
+	The Angular Router, representing a particular component view for a given URL, is not part of Angular Core. It is available in a library named @angular/router,
+	and we have to import the required router components. This process is called router imports.
+	See the following example of how we can import them in the app module:
+		import { RouterModule, Routes } from '@angular/router';  
+
+19) What do you understand by RouterOutlet and RouterLink?
+	A RouterOutlet is a directive from the router library that acts as a placeholder. 
+	It marks the spot in the template where the Router should display the components for that outlet. 
+	Router outlet is used as a component.
+		Syntax : <router-outlet></router-outlet>  
+		
+	On the other hand, a RouterLink is a directive on the anchor tags that gives the router control over those elements. Since the navigation paths are fixed, 
+	you can assign string values to router-link directive as below,
+	Syntax:
+		<h1>Angular Router</h1>  
+		<nav>  
+		  <a routerLink="/todosList" >List of todos</a>  
+		  <a routerLink="/completed" >Completed todos</a>  
+		</nav>  
+		<router-outlet></router-outlet> 
+
+20) What are the different router events used in Angular Router?
+	During each navigation, the Router emits navigation events through the Router.events property. It allows us to track the lifecycle of the route.
+	Following is the list of different router events in sequence:
+	- NavigationStart
+	- RouteConfigLoadStart
+	- RouteConfigLoadEnd
+	- RoutesRecognized
+	- GuardsCheckStart
+	- ChildActivationStart
+	- ActivationStart
+	- GuardsCheckEnd
+	- ResolveStart
+	- ResolveEnd
+	- ActivationEnd
+	- ChildActivationEnd
+	- NavigationEnd
+	- NavigationCancel
+	- NavigationError
+
+21) What do you understand by the RouterLinkActive?
+	The RouterLinkActive is a directive used to toggle CSS classes for active RouterLink bindings based on the current RouterState. i.e., the Router will add CSS
+	classes when this link is active and remove them when the link is inactive.
+	
+	For example, you can add them to RouterLinks as follows:
+		<h1>Angular Router</h1>  
+		<nav>  
+		  <a routerLink="/todosList" routerLinkActive="active">List of todos</a>  
+		  <a routerLink="/completed" routerLinkActive="active">Completed todos</a>  
+		</nav>  
+		<router-outlet></router-outlet>  
+
+22) What do you understand by the RouterState?
+	The RouterState is a tree of activated routes. Every node in this tree knows about the "consumed" URL segments, the extracted parameters, and the resolved 
+	data. We can access the current RouterState from anywhere in the application by using the Router service and the routerState property.
+
+23)  What do you understand by the RouterState?
+	The RouterState is a tree of activated routes. Every node in this tree knows about the "consumed" URL segments, the extracted parameters, and the resolved 
+	data. We can access the current RouterState from anywhere in the application by using the Router service and the routerState property.
+
+		@Component({templateUrl:'template.html'})  
+		class MyComponent {  
+		  constructor(router: Router) {  
+			const state: RouterState = router.routerState;  
+			const root: ActivatedRoute = state.root;  
+			const child = root.firstChild;  
+			const id: Observable<string> = child.params.map(p => p.id);  
+			//...  
+		  }  
+		}  
+	
+24) What is HttpClient, and what are the advantages of it?
+	Most front-end applications use either XMLHttpRequest interface or the fetch() API to communicate with backend services over HTTP protocol. For the same 
+	purpose, Angular provides a simplified client HTTP API known as HttpClient. This is based on top of XMLHttpRequest interface. This HttpClient is available 
+	in the @angular/common/http package, which you can import in your root module as follows:
+		import { HttpClientModule } from '@angular/common/http';  
+		
+	Following are some of the crucial advantages of HttpClient:
+	- HttpClient contains testability features.
+	- It provides typed request and response objects.
+	- It can intercept requests and responses.
+	- It supports Observalbe APIs.
+	- HttpClient also supports streamlined error handling.
+
+25) What is the best way to perform Error handling in Angular?
+	Error is when the request fails on the server or fails to reach the server due to network issues. In this condition, HttpClient returns an error object 
+	instead of a successful response. To resolve this issue, we must handle the component by passing the error object as a second callback to the subscribe() 
+	method.
+	See the following example to understand how we handle in the component:
+	
+		fetchUser() {  
+		  this.userService.getProfile()  
+			.subscribe(  
+			  (data: User) => this.userProfile = { ...data }, // success path  
+			  error => this.error = error // error path  
+			);  
+		}  
+	You can write an error message to give the user some meaningful feedback instead of displaying the raw error object returned from HttpClient.
+
+26) What are the key differences between a Component and a Directive in Angular?
+	A Component is a directive that uses shadow DOM to create encapsulated visual behavior. Usually, components are used to create UI widgets by breaking up the 
+	application into smaller parts. In short, we can say that a component (@component) is a directive-with-a-template.
+
+	A list of the major differences between a Component and a Directive in Angular:
+
+					Component											  |						Directive
+	1) Components are generally used for creating UI widgets.			  |	1) Directives are generally used for adding behavior to an existing DOM element.
+	2) We use @Component meta-data annotation attributes to register 	  |	2) We use @Directive meta-data annotation attributes to register directives.
+		a component.													  |
+	3) It is used to break up the application into smaller parts called   |	3) It is used to design re-usable components.
+		components.														  |				
+	4) Only one component is allowed to be used per DOM element.		  |	4) Multiple directives are allowed to be used per DOM element.
+	5) @View decorator or templateurl/template is mandatory in a component|	5) A Directive doesn't use View.
+	6) A component is used to define pipes.	I							  |	6) In a directive, it is not possible to define Pipes.
+
+27) What is the purpose of AsyncPipe in Angular?
+	The AsyncPipe is used to subscribe to an observable or promise and return the latest value it has emitted. When a new value is emitted, the pipe marks the 
+	component that has been checked for changes.
+	See the following example where a time observable continuously updates the view for every 2 seconds with the current time.
+	Example:
+
+		@Component({  
+		  selector: 'async-observable-pipe',  
+		  template: `<div><code>observable|async</code>:  
+			   Time: {{ time | async }}</div>`  
+		})  
+		export class AsyncObservablePipeComponent {  
+		  time = new Observable(observer =>  
+			setInterval(() => observer.next(new Date().toString()), 2000)  
+		  );  
+		}  
+		
+28) What do you understand by services in Angular?
+	In Angular, services are singleton objects that get instantiated only once during the lifetime of an application. An Angular service contains methods that 
+		are used to maintain the data throughout the life of an application. Angular services are used to organize as well as share business logic, models, or data 
+		and functions with various components of an Angular application.
+	Angular services offer some functions that can be invoked from an Angular component, such as a controller or directive.
+	
+29) What is the key difference between a constructor and ngOnInit?
+	Constructor is a default method in TypeScript classes that are normally used for the initialization purpose. On the other hand, the ngOnInit is specifically 
+	an Angular method and is used to define Angular bindings. Even though constructors are getting called first, it is always preferred to move all of your 
+	Angular bindings to the ngOnInit method.
+
+	See the following example how we can use ngOnInit by implementing OnInit interface as follows:
+
+		export class App implements OnInit{  
+		  constructor(){  
+			 //called first time before the ngOnInit()  
+		  }  
+		  ngOnInit(){  
+			 //called after the constructor and called  after the first ngOnChanges()  
+		  }  
+		}  
+		
+30) What do you understand by observable and observer in Angular?
+	Observable: 
+		An observable is a unique object just like a promise that that is used to manage async code. Observables are not part of the JavaScript language so the 
+		developers have to rely on a popular Observable library called RxJS. The observables are created using the new keyword.
+
+		See a simple example of observable to understand it better:
+		
+		import { Observable } from 'rxjs';  
+		const observable = new Observable(observer => {  
+		  setTimeout(() => {  
+			observer.next('This is a message from Observable!');  
+		  }, 1000);  
+		});   
+		
+	Observer: 
+		Any object that has to be notified when the state of another object changes is called an observer. An observer is an interface for push-based 
+		notifications delivered by an Observable.
+
+		See the structure of an observer:
+		
+		interface Observer<T> {  
+		  closed?: boolean;  
+		  next: (value: T) => void;  
+		  error: (err: any) => void;  
+		  complete: () => void;  
+		}   
+		
+31) What is multicasting in Angular?
+	Multicasting or Multi-casting is the practice of broadcasting to a list of multiple subscribers in a single execution.
+	Let's take a simple example to demonstrate the multi-casting feature:
+
+		var source = Rx.Observable.from([1, 2, 3]);  
+		var subject = new Rx.Subject();  
+		var multicasted = source.multicast(subject);  
+		// These are, under the hood, `subject.subscribe({...})`:  
+		multicasted.subscribe({  
+		  next: (v) => console.log('observerA: ' + v)  
+		});  
+		multicasted.subscribe({  
+		  next: (v) => console.log('observerB: ' + v)  
+		});  
+
+32) What is lazy loading in Angular? Why is it used?
+	In Angular, the by default tendency of NgModules is eagerly loaded. It means that as soon as the app loads, all the NgModules are loaded, whether or not 
+	they are immediately necessary. That's why lazy loading is required. Lazy loading is mandatory for large apps with lots of routes. This design pattern makes 
+	the app load NgModules when they are only required. Lazy loading helps keep initial bundle sizes smaller, which in turn helps decrease load times.
+
+33) What is the use of Angular filters? What are its distinct types?
+	Filters are an essential part of Angular that helps in formatting the expression value to show it to the users. We can easily add filters to services, 
+	directives, templates, or controllers. We can also create personalized filters as per requirements. These filters allow us to organize the data in such a 
+	way that only the data that meets the respective criteria are displayed. Filters are placed after the pipe symbol ( | ) while used in expressions.
+	A list of various types of filters used in Angular:
+
+	- currency: It is used to convert numbers to the currency format.
+	- filter: It is used to select a subset containing items from the given array.
+	- date: It is used to convert a date into a necessary format.
+	- lowercase: It is used to convert the given string into lowercase.
+	- uppercase: It is used to convert the given string into uppercase.
+	- orderBy: It is used to arrange an array by the given expression.
+	- json: It is used to format any object into a JSON string.
+	- number: It is used to convert a numeric value into a string.
+	- limitTo: It is used to restrict the limit of a given string or array to a particular number of elements or strings.
+	
+34) When do we use a Directive in Angular?
+	Directives are classes that add new behavior or modify the existing behavior to the elements in the template. Basically directives are used to manipulate 
+	the DOM, for example adding/removing the element from DOM or changing the appearance of the DOM elements.
+	
+35) What are the different types of directives in Angular?
+	There are mainly three types of directives in Angular:
+
+	1) Component Directives: The component directives are used to form the main class in directives. To declare these directives, we have to use the @Component 
+							decorator instead of @Directive decorator. These directives have a view, a stylesheet and a selector property.
+
+	2) Structural directives: These directives are generally used to manipulate DOM elements. The structural directive has a ' * ' sign before them. We can apply 
+							these directives to any DOM element. 
+
+		Following are some example of built-in structural directives:
+
+		*ngIf Structural Directive: *ngIf is used to check a Boolean value and if it's truthy, the div element will be displayed.
+			<div *ngIf="isReady" class="display_name">  
+			  {{name}}  
+			</div>  
+			
+		*ngFor Structural Directive: *ngFor is used to iterate over a list and display each item of the list.
+			<div class="details" *ngFor="let x of details" >  
+				<p>{{x.name}}</p>  
+				<p> {{x.address}}</p>  
+				<p>{{x.age}}</p>  
+			</div>  
+
+	3) Attribute Directives: The attribute directives are used to change the look and behavior of a DOM element. Let's create an attribute directive to 
+		understand it well:
+		This is how we can create a custom directive:
+		Go to the command terminal, navigate to the directory of the angular app and type the following command to generate a directive:
+			ng g directive yellowBackground   
+		
+		This will generate the following directive. Manipulate the directive to look like this:
+
+			import { Directive, ElementRef } from '@angular/core';  
+			@Directive({  
+			 selector: '[appYellowBackground]'  
+			})  
+			export class YellowBackgroundDirective {  
+			 constructor(el:ElementRef) {  
+			   el.nativeElement.style.backgroundColor = "yellow";  
+			 }  
+			}  
+
+36) What are string interpolation and property binding in Angular?
+	- String interpolation and property binding are parts of data-binding in Angular. Data-binding is a feature of Angular, which is used to provide a way to 
+		communicate between the component (Model) and its view (HTML template). There are two ways of data-binding, one-way data binding and two-way data binding. 
+		In Angular, data from the component can be inserted inside the HTML template. Any changes in the component will directly reflect inside the HTML template in 
+		one-way binding, but vice-versa is not possible. On the other hand, it is possible in two-way binding.
+	- String interpolation and property binding both are examples of one-way data binding. They allow only one-way data binding.
+	- String Interpolation: String interpolation uses the double curly braces {{ }} to display data from the component. Angular automatically runs the expression 
+		written inside the curly braces. For example, {{ 5+5 }} will be evaluated by Angular, and the output will be 10. This output will be displayed inside 
+		the HTML template.
+	- Property Binding: Property binding is used to bind the DOM properties of an HTML element to a component's property. In property binding, we use the square 
+		brackets [ ] syntax.
+
+37) What is Dependency Injection in Angular?
+	Dependency injection is an application design pattern that is implemented by Angular. It is used to form the core concepts of Angular. Dependencies are 
+	services in Angular which have some specific functionality. Various components and directives in an application can need these functionalities of the service.
+	Angular provides a smooth mechanism by which these dependencies are injected into components and directives.
+
+38) 
+
+
+
+
+

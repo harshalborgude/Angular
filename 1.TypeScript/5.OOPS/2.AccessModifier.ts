@@ -17,7 +17,7 @@
 -----------------------------------------------
 Interfaces :
 - Interface is the one which contains only abstract methods and properties
-- The mthod which doesn't contain body is called as abstract method.
+- The method which doesn't contain body is called as abstract method.
 - In interface we will write only method declaration , Interface doesn't contain method implementations.
 - To implement a interface class will use "implements" keyword.
 - interface methods are byDefault public.

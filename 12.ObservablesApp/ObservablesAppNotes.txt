@@ -5,15 +5,18 @@
 2) Synchronous code is blocking in nature , asynchronous code is non blocking , It runs in background , like to get data from http requests.
 3) Diff between Observables and Promises,
                         Observable                          |                            Promise
-    1) Observable will not return complete data ,           |        1) Promise return us all the data at once.Promise promises us a data and 
-       It streams the data so it will send in chunks/packets|            provides us over period of time.Promise returns a data when complete 
-                                                            |            data is collected , It can be a error also.
-    2)  Observable only provide data if code is using It    |        2) It will give all data even If no code using that data.
-    3)  Observable is not native feature of javscript , it  |        3) Promise is the native feature of javaScript.   
-        It is provided by another javaScript library RxJs   |        
-    4) Observable is a function that converts ordinary      |
+    1) Observable will not return complete data ,           |  1) Promise return us all the data at once.Promise promises us a data and 
+       It streams the data so it will send in chunks/packets|       provides us over period of time.Promise returns a data when complete 
+                                                            |       data is collected , It can be a error also.
+    2)  Observable only provide data if code is using It    |  2) It will give all data even If no code using that data.
+    3)  Observable is not native feature of javscript , it  |  3) Promise is the native feature of javaScript.   
+        It is provided by another javaScript library RxJs   |   
+    4) Lazy. An observable is not called until we subscribe |  4) Not Lazy
+        to the observable.                                  |  
+    5) We can cancel it by using the unsubscribe() method.  |  5) We can not cancel it.                              |
+    6) Observable is a function that converts ordinary      |
         Stream of data into Observable stream.              |
-    5) Have 2 parts , Observable(stream of data) and Subscriber (Observer) , Observer have to Subscribe that Observable.    
+    7) Have 2 parts , Observable(stream of data) and Subscriber (Observer) , Observer have to Subscribe that Observable.    
 
 4) To use Observable , we need RxJs library , that will automatically get install when we create angular project.
 5) To Create new Observable object , have to pass a callback function to its constructor, Observer will only emit the data if there is subscriber.

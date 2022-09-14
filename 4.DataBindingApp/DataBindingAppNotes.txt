@@ -4,7 +4,7 @@
 * Data Binding :
     - Data binding is a technique which is used to establish relation between "component" and "template".
         - Component is a typescript class.
-        - template is a html file
+        - template is a html file.
     - By using data binding technique , we can send data from component class to template file and vice versa.
                             DataBinding
         Component class <---------------> Template
@@ -16,25 +16,34 @@
         4) Two way Binding
         -----------------------
         1) Interpolation : 
+            - Used to acheieve One way data binding , from component class to template class.
             - Used to display variable/property/field value in template.
             - If variable/property value change then it will be immediately updated in template.
+            - Binding property of component with view template.
 
             Syntax : {{ proprty Name }}
 
+            - inside this , we can write any js expression and can call any method.
+            - using string Interpolation we can use properties and methods of component class.
+
         2) Property Binding : 
+            - Used to acheieve One way DataBinding
+            - Using this we can bind property of DOM object to property of component class.
             - Property Binding is used to send the data from component to template and assign the same into an attribute of tag.
             - If property is changed then immediately it will be updated in template.
 
-            Syntax : [attribute] = *property
+            Syntax : [html tag attribute] = "component property"
+            <img [src]="srcImg" alt="">
 
         3) Event Binding :
+            - data binding from html template to component class.
             - It is used to pass event notification from template to component.
 
             Syntax : <tag (event) = "method()"> / <tag onClick = "method()">
         
         4) Two-way Data Binding :
             - Two-way data binding is the combination of both "property binding" and "event binding".
-            - To achieve Two-way data binding we ahve "ngModel" directive.
+            - To achieve Two-way data binding we have "ngModel" directive.
             - Two-way data binding is applicable only for <input/> and <select/> tags.
             - To use two-way data binding we must import "Forms Module"
 

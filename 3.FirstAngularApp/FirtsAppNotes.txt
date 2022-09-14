@@ -11,7 +11,7 @@
     - app.module.ts
     - app.compoenent.ts  -> contains logic to handle request.
     - app.compoenent.spec.ts -> Unit testing logic
-    - app.compoenent.html -> Template (presentation logic)
+    - app.component.html -> Template (presentation logic)
     - app.compoenent.css -> Styles will be written here.
 
 -----------------------------------------------------------
@@ -75,7 +75,7 @@ Angular app bootstrapping mechanism / start up module in angular:
         syntax : platformBrowserDynamic().bootstrapModule(AppModule)
 
 Steps while starting angular app : (angular application is collection of component like classes in java)
-    - ng serve cmd is used to start angular app , when we execute ng server cmd , it will start "main.ts" file ,
+    - ng serve cmd is used to start angular app , when we execute ng serve cmd , it will start "main.ts" file ,
     - "main.ts" file will start "app.module"(app.module.ts) , app.module contains app.module.ts
     - "app.module" will start "app.component" 
     - inside app.component 4 files are there (every component will have these 4 files)
@@ -106,7 +106,7 @@ Steps while starting angular app : (angular application is collection of compone
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-    - Component represents certain sectio in webpage.
+    - Component represents certain section in webpage.
     - For Example "Login Form" will be represented by login component.
     - "Registration form/page" will be represented by "registration component".
     

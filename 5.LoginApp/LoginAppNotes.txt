@@ -12,7 +12,7 @@ Requirement : Develop Angular Application with Login Screen
 6) Open browser and acess below url. : http://localhost:4200
 
 Solution : 
-    - in "app.module.ts" import FormsModule to take imputs of forms.
+    - in "app.module.ts" import FormsModule to take inputs of forms.
     - declare 3 vars in app.component.ts , username , password , msg
     - define method CheckLogin(); to check weather credentials are right or not with if condition.
     - in "app.component.html" create a form component enclosed in div tag.

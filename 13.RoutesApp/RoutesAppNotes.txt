@@ -9,7 +9,7 @@ Routing in angular
 
 3) Import RouterModule,Routes from @angular/router. -> (import { RouterModule, Routes } from '@angular/router';)
 4) in imports of RouterModule , call "RouterModule.forRoot(appRoute)" method with "appRoute" const , so using this now our application knows about all the routes using this.
-5) Instead components selectors in "app.component.html" file user "<router-outlet></router-outlet>" this directive. (this directive is of ROuterModule so its already imported in app.module)
+5) Instead components selectors in "app.component.html" file use "<router-outlet></router-outlet>" this directive. (this directive is of ROuterModule so its already imported in app.module)
 6) So now with "http://localhost:4200/Home" this url it will "show home page", and same for "/Contact","/Course","/About"
 7) With this "http://localhost:4200/" only navigation tabs getting displayed , No any page is there so , in appRoute const , have to add 1 route for root route so,
     {path:"",component:HomeComponent}

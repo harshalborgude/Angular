@@ -11,7 +11,7 @@ Pipes  : import { Pipe } from '@angular/core'; - pipe decorator.
 
 2) Types of Pipes ?
     1) Built-in Pipes / Pure Pipes (Default): These are called only when angular detects a change in the value or the parameters passed to a pipe.
-        - parameterized : any number of parameters 
+        - parameterized : any number of parameters.
         - Chaining : Chain of pipes
             
             @pipe({

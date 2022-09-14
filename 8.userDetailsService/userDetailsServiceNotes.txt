@@ -8,7 +8,7 @@ Requirement : to create 2 diff independent services , 1 to add user details and 
 
 2) userService have added in provider of app components and created instance in constructor of app components.
     so this instance will be available to all the child components - allUsers and userDetails
-3) Have created instance of userService in both the components so can be accessed same instance.Providers
+3) Have created instance of userService in both the components so can be accessed same instance. Providers
     have not provided , as it will create different instance then.
 
 4) On click of showDetails button from all-users component , it will call "ShowUserDetails" methods of user-details service

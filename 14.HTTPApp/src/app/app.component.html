@@ -6,20 +6,40 @@
     </div>
     <div class="container">
       <!-- Add Product Form -->
-      <div class="form-area">
+      <div class="form-area" >
         <h3>Create Product</h3>
-        <form>
-          <label>Product Name</label>
-          <input type="text">
+        <form #productsForm="ngForm" (ngSubmit)="onProductCreate(productsForm.value)">
+          <label>Product Name</label> <br>
+          <input type="text" name="pname" ngModel> <br>
 
-          <label>Product Description</label>
-          <input type="text">
+          <label>Product Description</label> <br>
+          <input type="text" name="description" ngModel> <br>
 
-          <label>Product Price</label>
-          <input type="text">
+          <label>Product Price</label> <br>
+          <input type="text" name="price" ngModel> <br>
 
           <input type="submit" value="Add Product">
         </form>
+      </div>
+
+      <!-- Display product area -->
+      <div>
+        <h3>All Producs</h3>
+        <table id="products">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Laptop</td>
+            <td>A Lenove Laptop</td>
+            <td>$1210</td>
+          </tr>
+            
+        </table>
       </div>
 
     </div>

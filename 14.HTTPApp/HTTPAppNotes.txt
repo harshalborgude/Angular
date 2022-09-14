@@ -1,8 +1,40 @@
+import { HttpClientModule } from '@angular/common/http';
 
-1) 
+URL : localhost:4332/myApp
+HTTP Verbs : GET , POST , PUT , PATCH , DELETE
+HEADERS : Metadata of the request
+Body : Data to send to the server
 
 
+firebase URL : https://angularbackendhrb-default-rtdb.firebaseio.com/
 
+=================================================================================================================================================
+* POST request :
+
+1) To make any http request have to import "HttpClientModule" from "@angular/common/http"
+2) In component class , have to inject instance of HttpClient. ( import { HttpClient } from '@angular/common/http' )
+3) With the instance of http (HttpClient) , we can make http requests.
+    constructor(private http : HttpClient){ }
+
+4) In Pots requests , in body , we can provide objects , those objects will be converted into JSON format bydefault by post method.
+    - Post request will return the observable, So observable emmit the data only when there is subscriber.
+    - untill subscriber is not there , post request will not completed.
+5) When we send "Post" request , browser always sends 2 requests, This is default behaviour of browser.
+    - First post request will send as "OPTIONS" request method , this will check weather its available to send post request or not?
+6) http.post(url , body , headers )
+    - We can pass custome header as a 3rd arguments in post request , have to create HttpHeaders object for that.
+
+     const headers = new HttpHeaders({'myHeader':'test'});
+     this.http.post(
+        'https://angularbackendhrb-default-rtdb.firebaseio.com/products.json',
+        products,{headers:headers})
+      .subscribe((response)=>{
+        console.log("response :"+response);
+      });
+
+
+===================================================================================================================
+* GET request :
 
 
 

@@ -29,8 +29,9 @@ Directives :
 2) ngClass : refer class-dir component
             - [ngclass] = "myclass"  : this way we can assign a css class var to tag.
 
-3) ngIf / ngIf and else :  refer ifelse-dir component 
+3) *ngIf / *ngIf and else :  refer ifelse-dir component 
             - here status is the boolean value.
+            Ex 1:
             <div *ngIf="status;then template1;else template2">
             </div>
             <ng-template #template1>
@@ -40,7 +41,15 @@ Directives :
                 <h4>Better Luck Next Time!</h4>
             </ng-template>
 
-4) ngFor :   refer ngfor component , ngforobject
+            Ex 2:
+            <div *ngIf="var ; else template1">
+                <p> Text </p>
+            </div>
+            <ng-template #template1>
+                <p> Text </p>
+            </ng-template>
+
+4) *ngFor :   refer ngfor component , ngforobject
             - It is used to repeat the tag once for each element in the array.
             - We have to prefix "*" before ngFor directives.
             - The same way we can access Objects also.
@@ -52,7 +61,7 @@ Directives :
             </tag>
 
 
-5) ngSwitch : refer ngSwitch component 
+5) *ngSwitch : refer ngSwitch component 
                 - It is used to display perticular tag of of many tag based on matching case.Like switch case.
                 - property assigned to ngSwitch directive is binded using property binding , and ngSwicth will take value from component.
                 - user two words ([ngSwicth]="property") and (*ngSwicthCase="'case'")
@@ -64,7 +73,14 @@ Directives :
                     <p *ngSwitchCase="'lawyer'">This paragraph will be displayed when occupation is Lawyer</p>
                     <p *ngSwitchDefault>This paragraph will be displayed when when no value matches - Dafault value</p>
                 </Div>
+            
 
+- In structural directives like ngIf, ngIfElse , ngFor - * (asterisk / shorthand) syntax is always used before directive.
+- This asterisk tells angular that this is a structural directive. So internally angular wraps that view inside 
+    <ng-template [ngIf]="true/false"> 
+        html-view-content 
+    </ng-template>
+- So This conversion internally taken place, there angular removes that asterisk and make it like other directives.
 
 
 =========================================================================================
