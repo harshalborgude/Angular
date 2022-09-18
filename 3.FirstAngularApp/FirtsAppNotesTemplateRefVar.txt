@@ -1,0 +1,47 @@
+
+
+===========================================================================================================
+1) Template Reference Variable :
+
+    - it is a reference to any DOM element, component or a directive in a template where we have used it.
+    - to create a template reference var , we use "#" sign and then specify name.
+
+        <input type="text" #myTemplate (keyup)="0">
+        <button> (click)="sayHello(myTemplate)"</button>
+
+    - so here "myTemplate" will store reference to this input element, when page renders.
+        {{ myTemplate.value }}
+    - so like this we can take value from reference variable , but for that we have to bind event and do nothing 
+        so html can detect that change
+    - To "sayHello" method , we are passing local reference , So type of local reference is "HTMLInputElement"
+         
+        sayHello(inputEl:HTMLInputElement) {
+            alert(inputEl.value);
+        }
+    
+    - this "inputEl" is that whole input tag itself.So reference variables stores that whole tag itself.
+
+
+    * Local Reference On a component
+    - If we assign any local reference variable to any component then that represents that whole component.
+
+        <app-component #appComponent ></app-component>
+        <p>The value in component is :{{ appComponent.students?.name }}</p>
+
+    - so "students" can be the property of app.component.ts class , and so local reference "#appComponent" represents
+        that whole class.
+    
+    - "?" this is "nullish Collising Operator" , So if initially any value is "null" then have to use that.
+        So operation will not takes place if any value is null.
+
+
+
+
+
+
+
+
+
+
+
+

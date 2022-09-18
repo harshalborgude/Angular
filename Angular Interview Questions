@@ -8,9 +8,9 @@
 	
 2) Advantages of using angular 
 	- Angular supports two-way data-binding.
+	- It provides support for dependency injection.
 	- It also supports RESTfull services.
 	- Validations are supported in Angular.
-	- It provides support for dependency injection.
 	- It follows MVC pattern architecture.
 	- It supports static templates and Angular template.
 	- It facilitates you to add a custom directive.
@@ -33,6 +33,7 @@
 						JavaScript.
 	- Long-term Google Support : Angular is developed and maintained by Google. Google has a long term plan to stick with Angular and provide support.
 
+---
 6) What are the different Lifecycle hooks of Angular? Explain them in short.
 	When the Angular components are created, they enter their lifecycle and remain when they are destroyed. Angular Lifecycle hooks are used to check the phases
 	and trigger changes at specific phases during the entire duration.
@@ -98,6 +99,7 @@
 		$scope for Controller 1  
 		$scope for Controller 2  
 
+---
 13) Diff between Observables and Promises,
                         Observable                          |                            Promise
     1) Observable will not return complete data ,           |  1) Promise return us all the data at once.Promise promises us a data and 
@@ -121,6 +123,7 @@
 	Angular CLI is a short form for Angular Command Line Interface. It is a command-line interface to scaffold and build angular apps using node.js style modules.
 	To use Angular CLI, we have to install it by using the following npm command : npm install @angular/cli@latest  
 
+---
 16) What is lazy loading in Angular?
 	Lazy loading is one of the most powerful and useful concepts of Angular Routing. It makes the web pages easy to download by downloading them in chunks 
 	instead of downloading everything in a big bundle. Lazy loading facilitates asynchronously loading the feature module for routing whenever required using 
@@ -144,6 +147,7 @@
 		  }  
 		];  
 	
+---
 17) What is Angular Router?
 	Angular Router is a mechanism that facilitates users to navigate from one view to the next as users perform application tasks. It follows the concept model 
 	of browser's application navigation.
@@ -219,12 +223,15 @@
 			//...  
 		  }  
 		}  
-	
+		
+		
+---
 24) What is HttpClient, and what are the advantages of it?
 	Most front-end applications use either XMLHttpRequest interface or the fetch() API to communicate with backend services over HTTP protocol. For the same 
 	purpose, Angular provides a simplified client HTTP API known as HttpClient. This is based on top of XMLHttpRequest interface. This HttpClient is available 
 	in the @angular/common/http package, which you can import in your root module as follows:
-		import { HttpClientModule } from '@angular/common/http';  
+		import { HttpClientModule } from '@angular/common/http';
+		import { HttpClient } from '@angular/common/http
 		
 	Following are some of the crucial advantages of HttpClient:
 	- HttpClient contains testability features.
@@ -248,6 +255,7 @@
 		}  
 	You can write an error message to give the user some meaningful feedback instead of displaying the raw error object returned from HttpClient.
 
+---
 26) What are the key differences between a Component and a Directive in Angular?
 	A Component is a directive that uses shadow DOM to create encapsulated visual behavior. Usually, components are used to create UI widgets by breaking up the 
 	application into smaller parts. In short, we can say that a component (@component) is a directive-with-a-template.
@@ -280,13 +288,15 @@
 			setInterval(() => observer.next(new Date().toString()), 2000)  
 		  );  
 		}  
-		
+	
+---	
 28) What do you understand by services in Angular?
 	In Angular, services are singleton objects that get instantiated only once during the lifetime of an application. An Angular service contains methods that 
 		are used to maintain the data throughout the life of an application. Angular services are used to organize as well as share business logic, models, or data 
 		and functions with various components of an Angular application.
 	Angular services offer some functions that can be invoked from an Angular component, such as a controller or directive.
-	
+
+---	
 29) What is the key difference between a constructor and ngOnInit?
 	Constructor is a default method in TypeScript classes that are normally used for the initialization purpose. On the other hand, the ngOnInit is specifically 
 	an Angular method and is used to define Angular bindings. Even though constructors are getting called first, it is always preferred to move all of your 
@@ -370,6 +380,7 @@
 	Directives are classes that add new behavior or modify the existing behavior to the elements in the template. Basically directives are used to manipulate 
 	the DOM, for example adding/removing the element from DOM or changing the appearance of the DOM elements.
 	
+---
 35) What are the different types of directives in Angular?
 	There are mainly three types of directives in Angular:
 
@@ -428,7 +439,12 @@
 	services in Angular which have some specific functionality. Various components and directives in an application can need these functionalities of the service.
 	Angular provides a smooth mechanism by which these dependencies are injected into components and directives.
 
-38) 
+38) How to use angular to make http POST / GET / PUT call?
+
+39) 
+ 
+40)
+41) 
 
 
 

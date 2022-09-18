@@ -1,7 +1,7 @@
 
 * lot of error are there , have to study topic in details.
 
-Pipes  : import { Pipe } from '@angular/core'; - pipe decorator.
+Pipes  : import { Pipe , PipeTransform } from '@angular/core'; - pipe decorator.
 ---------------------------------------------------------------------
 1) WHat are pipes ?
     - Pipes are functions which is used in template expressions to accept an input value and return a transformed value.
@@ -11,17 +11,7 @@ Pipes  : import { Pipe } from '@angular/core'; - pipe decorator.
 
 2) Types of Pipes ?
     1) Built-in Pipes / Pure Pipes (Default): These are called only when angular detects a change in the value or the parameters passed to a pipe.
-        - parameterized : any number of parameters.
-        - Chaining : Chain of pipes
-            
-            @pipe({
-                name : 'filterPipe',
-                pure : true
-            })
-            export class filterPipe { }
-
-            ex : <p> The birthday is {{ birthday | date }} </p>
-        ---------------------------------------------------------------
+        
         Built in Pipes are :
         1) Date Pipe : formats the date value according to locale rules.
                         {{ dateVal | date: 'shortTime' }} -> 4.38 PM
@@ -39,15 +29,37 @@ Pipes  : import { Pipe } from '@angular/core'; - pipe decorator.
         6) PercentPipe : Transforms a number to a Percentage string , formatted according to locale rule.
                         {{ 0.1213478 | Percent }} -> 12.134%
                         {{ 0.1213478 | Percent: '2.1-2' }} -> 12.14%
-                        2.1-2 means 2 digits and 2 decimal places. 
+                        2.1-2 means 2 digits and 1 min decimal place and 2 maximum decimal places. 
+        
+              ex : <p> The birthday is {{ birthday | date }} </p>
 
-========================================================================================================================
-    2) Customized Pipes / Impure Pipes : An impure pipe is called for every change detection cycle , no matter wheather the value or parameters changes.
+    ========================================================================================================================
+    2) Customized Pipes / Impure Pipes : 
+
+        - Customized pipes can be pure or impure , based on the value of "pure"  , ( true - pure , false - impure )
+        - An impure pipe is called for every change detection cycle , no matter wheather the value or parameters changes.
+
+            // impure pipe
             @pipe({
                 name : 'filterPipe',
                 pure : false
             })
             export class filterPipe { }
+
+        -------------------------------------------------------------
+
+        - parameterized : any number of parameters.
+        - Chaining : Chain of pipes
+            
+            // pure pipe
+            @pipe({
+                name : 'filterPipe',
+                pure : true
+            })
+            export class filterPipe { }
+
+          
+
 
 
 

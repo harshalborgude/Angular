@@ -2,6 +2,8 @@
 <div>
     <p>{{ file.name }}</p>
     <p>{{ file.size | filesize }}</p>
+    <!-- <p>{{ marks / totalMarks | percentage }}%</p> -->
+    <p>{{ marks | percentage : totalMarks : 2 }}%</p>
     <p>converted this file size to half using custome pipe</p>
 </div>
 

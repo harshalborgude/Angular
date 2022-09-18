@@ -82,7 +82,7 @@ Steps while starting angular app : (angular application is collection of compone
         - app.component.css : stylesheet
         - app.component.html : presentation logic
         - app.component.ts : logic of presentaion - controller (properties and methods)
-            - app.component.spec.ts : unit testing
+        - app.component.spec.ts : unit testing
     - component is the one portion of webpage.
 
 * how content will be displayed in index.html file ?
@@ -96,7 +96,7 @@ Steps while starting angular app : (angular application is collection of compone
             : ng generate component <component-name>
             : ng g c <component-name>
     - After creating component with above cmd , new component will be created under app parent component.
-    - That new component will be imported in app.module.ts and that component will be added in @ngModule tag.
+    - That new component will be imported in app.module.ts and that component will be added in @NgModule tag.
     - app.component.html file will contain the selector of the greet component "app-greet"
     - If we write any styles in the css file of specific component , then it will be applicable only for that component's
         html file.
@@ -142,7 +142,7 @@ Q. Syntax to create a component ?
     @Component({
         selector : 'app-root',
         templateUrl : './app.component.html',
-        styleUrl : ['./app.component.css']
+        styleUrls : ['./app.component.css']
     })
 
     -> 'selector' represents a tag which invokes the component.

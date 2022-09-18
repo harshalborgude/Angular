@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { mergeScan } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

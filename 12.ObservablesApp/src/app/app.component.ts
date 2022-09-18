@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of ,map, filter, interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -75,10 +75,47 @@ export class AppComponent implements OnInit {
   // It iterates the over the iterable and emmits those values 1 by 1.
   // We can convert "Promise" to "Observable" using from operator.
 
+  /*
   array1 = [1,2,3,4,8];
   array2 = ['A','B','C'];
 
   myObservable = from( this.array1);
+  */
+
+//===================================================================================================================
+  // Operators in Observables 
+  // map will use to transform the data , in single pipe we can use multiple operators - pipe(map()=>{},filter()=>{})
+  // so here "map" will return transformed observable and it will be input to another operator "filter".
+  // operator will be applied in the given order.
+  // 1) map Operator : will transform the data of the observable and return new observable.
+  // 2) filter Operator : will filter out the data from observable and return new observable with filtered data.
+
+  array3 = [1,2,3,4,8];
+
+  myObservable = from(this.array3);     
+  // 1,2,3,4,8  => (*5) => 5,10,15,20,40
+  mapObservable = this.myObservable.pipe(map((val)=>{
+      return val*5;
+  }),filter((val)=>{    // here after map operator it will return new observable and on that filter operator will be applied and it will return another observable.
+    return val>5;
+  }));
+
+  // 2) filter Operator :
+  // 5,10,15,20,40 => (val>17) => 20,40
+  filterObservable = this.mapObservable.pipe(filter((val)=>{
+    return val>17;
+  }));
+
+  
+
+  //============================================================================================================================================
+  // Interval function - used to check unsubscribe logic
+  // This will return a observable and it will keep returning data infinitely until we Unsubscribe it.
+  // if subscribe again and again , it will return new observable each time.
+
+  counterObservable = interval(1000);   // returns numbers after that interval.
+  counterUnsubscribe: Subscription | undefined ;
+
 
 
 //======================================================================================================================================
@@ -88,6 +125,7 @@ export class AppComponent implements OnInit {
   // Subscriber will recieve a data one by one in streams.
   // first callback func get executed when it recieves "value" , second gets executed when it recieves "error" , third gets executed when data "completed"
   // Inside each call back func we can write handling logic of it, So there we can handle error also.
+  /*
   ngOnInit(): void {
     this.myObservable.subscribe((val) => {
       console.log(val);
@@ -97,5 +135,42 @@ export class AppComponent implements OnInit {
       alert("Observable has completed emmiting values!");
     });
   }
+  */
+
+  /*
+  ngOnInit(): void {
+    this.mapObservable.subscribe((val) => {
+    // this.filterObservable.subscribe((val) => {
+      console.log(val);
+    }, (error) => {
+      alert(error.message);
+    }, () => {
+      alert("Observable has completed emmiting values!");
+    });
+  }
+  */
+
+ 
+  ngOnInit():void {
+    // subscribe method will return a numbers(counts), those are also a Observables
+
+    // this.counterUnsubscribe = this.counterObservable.subscribe((val)=>{
+    //   console.log(val);
+    // })
+
+  }
+
+  // On subscribe button press , it will subscribe to observable
+  subscribe(){
+    this.counterUnsubscribe = this.counterObservable.subscribe((val)=>{
+      console.log(val);
+    })
+  }
+
+  // To unsubscibe the observable on unsubscribe button click
+  unsubscribe(){
+    this.counterUnsubscribe?.unsubscribe();
+  }
+  
 
 }

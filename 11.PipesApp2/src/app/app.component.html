@@ -1,0 +1,48 @@
+<h1>Pipes App</h1>
+
+<div>
+  <!-- Here "marks" is first argument and "toralMarks" is second argument and "2" is 3rd argument -->
+  <!-- <p>{{ marks / totalMarks | percentage }}%</p> -->
+  <p>Percentage : {{ marks | percentage : totalMarks : 2 }}%</p>
+  
+  <button (click)='onAddStudent()'>Add Student</button>         <!-- To add new student -->
+  <button (click)='onChangeGenderClick()'>Change Gender</button> <br><br>      <!-- To change gender of student -->
+
+  <h3>Total Students :{{totalStudents | async }}</h3>
+
+  <!-- filter pipe -->
+  <input type="text" [(ngModel)]="filterText" placeholder="enter gender to filter">
+  <input type="submit" (click)='filterForGender()'>
+
+  <table>
+    <tr>
+      <th>name</th>
+      <th>gender</th>
+    </tr>
+    <!-- genderFilter pipe was used to filter data , but we should not use pipes for filtering -->
+    <tr *ngFor="let student of students | genderFilter :filterText">
+      <td>{{student.name}}</td>
+      <td>{{student.gender}}</td>
+    </tr>
+    
+  </table> <br><br><br>
+
+  <!-- ------------------------------------------------------------------------------------------------------ -->
+  <!-- Filtering same above data without filters , inside component only -->
+
+  <input type="text" [(ngModel)]="filterText2" placeholder="enter gender to filter">
+  <input type="submit" (click)='filterStudentByGenders()'>
+  <table>
+    <tr>
+      <th>name</th>
+      <th>gender</th>
+    </tr>
+    <!-- genderFilter pipe was used to filter data , but we should not use pipes for filtering -->
+    <tr *ngFor="let student of filteredStudents">
+      <td>{{student.name}}</td>
+      <td>{{student.gender}}</td>
+    </tr>
+    
+  </table>
+  
+</div>

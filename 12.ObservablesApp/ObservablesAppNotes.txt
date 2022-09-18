@@ -1,4 +1,4 @@
-// import { Observable, of } from 'rxjs';
+// import { from, Observable, of ,map, filter, interval} from 'rxjs';
 
 
 1) We can handle asynchronous operations using "Observables" or "Promises".
@@ -51,6 +51,12 @@
         observer.error(new Error("Something went wrong, Plz try again!"))
         observer.complete()
 
+8) If we subscribe observable again and again , then it will return another "Observable" and those will run parallely.
+    So it is very important to unsubscibe observable when we dont need it.
+
+
+
+
 ====================================================================================================================
 Different Ways of creating Observables :
 
@@ -71,10 +77,93 @@ Different Ways of creating Observables :
 
     myObservable = from( this.array1);
 
+=====================================================================================================================
+
+Operators in Observables: ( map , filter )
+
+- Operators takes Observable as input and transform it into a new observable and return it.Operators are use to 
+    manipulate the observable data stream.
+    ex : from() operator .
+
+- To use Operators , have to import them from 'rxjs/operators', (import { map } from 'rxjs';)
+- map will use to transform the data , in single pipe we can use multiple operators - pipe(map()=>{},filter()=>{})
+- so here "map" will return transformed observable and it will be input to another operator "filter".
+- operator will be applied in the given order.
+
+1) map Operators : 
+    - will transform the data of the observable and return new observable.
+    - values of myObservable will be transformed and stored into transformedObservable. (val*5)
+    
+        transformedObservable = this.myObservable.pipe(map((val)=>{
+        return val*5;
+        }))
+
+2) filter Operators :
+    -  will filter out the data from observable and return new observable with filtered data.
+
+        filterObservable = this.mapObservable.pipe(filter((val)=>{
+            return val>17;
+        }));
+
+=================================================================================================================================================
+Subjects in rxjs :     ( import { Subject } from 'rxjs'; )
+
+- A Subject is a special type of Observable that allows values to be "multiCasted" to "many Observers".
+- Subjects are used for cross component communication , works same as eventEmitter as we had done previously.
+- Subjects are like EventEmitters.
+ 
+
+    // in service class
+    // dataEmitter = new EventEmitter<String>();        // using EventEmitter.
+    dataEmitter = new Subject<string>();
+    onEvent(data:string){
+        this.dataEmitter.next(data);
+        // this.dataEmitter.emit(data);
+    }
+
+- So here input data to "onEvent()" method from 1 component will be emited .
+- In another component , "subscriber" will be there to "dataEmitter" Subject, It will subscribe it and will recieve the data same as Observable.
+
+    // in another component 
+    constructor(private service:Service){};
+    data:string;
+    getDate(){
+        this.service.subscribe((data)=>{
+            this.data = data;
+        })
+    }
 
 
+==========================================================================================================================
 
+Unsubscribe to Observable :
 
+- Interval function - It returns the count infinitely , used to check unsubscribe logic 
+- This will return a observable and it will keep returning data infinitely until we Unsubscribe it.
+        counterObservable = interval(1000); 
+
+        ngOnInit():void {
+            this.counterUnsubscribe = this.counterObservable.subscribe((val)=>{
+                console.log(val);
+            })
+        }
+- Observables subscribe method returns an object of RxJS’s Subscription type, we can use this to "unsubscribe".
+    // To unsubscibe the observable on unsubscribe button click
+    unsubscibe(){
+        this.counterUnsubscribe.unsubscibe();
+    }
+
+- If we subscribe observable again and again , then it will return another "Observable" and those will run parallely.
+- Observable is of type "Subscription"
+- Normally we can write "unsubscibe" method in "ngOnDestroy()" lifecycle method.
+- we can collect subscriptions in array of "Subscription" , And ca unsubscribe them in a loop in "ngOnDestroy" method. 
+
+    subscriptions: Subscription[] = []
+    this.subscriptions.push(this.subscription1$)
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+    }
 
 
 

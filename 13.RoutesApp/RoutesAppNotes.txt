@@ -1,5 +1,5 @@
 
-Routing in angular
+Routing in angular    : import { RouterModule, Routes } from '@angular/router';
 -----------------------------------------------------
 1) Create app and all the components , in app.component.html file add all navigation tabs and all components.
 2) In "app.module.ts" file create const "appRoute:Routes" with the path and its component. 

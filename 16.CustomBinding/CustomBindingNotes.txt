@@ -1,0 +1,131 @@
+
+Custome Property Bindings :
+
+- We can pass data from component class to view template and vice a versa using property binding, string interpolation and event binding.
+- We can also pass data from parent component to child component and vice versa , We use @Input decorator and @Output decorator.
+    @Input - data from "parent component" => "child component". : input to child
+    @Output - data from "child component" => "parent component". : output from chile
+- As we can bind custom properties , so it is called as "custom property binding"
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+- Here in CustomBinding projec , we have 4 components,
+    - App Component :
+        -----------------------------------------------------------------------------------------------------------
+        1) courses : have all the list of components and displays it , also have "search" and "filter" component also       
+                        child component.
+            *courses[] - list of all courses.
+            *getTotalCourses() - count of total courses
+            *getTotalFreeCourses() - count of total free courses
+            *getTotalPremiumCourses() - count of total premium courses
+
+            *courseCountRadioButton: string ="All"; - take track of radio button selected.
+            *onFilterRadioButtonChanged(data:string){} - to assign radio button new value on changed.
+
+            *searchText:string="";
+            *searchCourses(searchText:string){}
+
+                <app-filter [all]="getTotalCourses()" 
+                            [free]="getTotalFreeCourses()" 
+                            [premium]="getTotalPremiumCourses()"
+                            (filterRadioButtonSelectionChanged)="onFilterRadioButtonChanged($event)">
+                </app-filter>
+
+            - "courses" array will have data of all courses , "getTotalCourses" will get count of total courses and same for other methods.
+            - "courseCountRadioButton" will keep track of which radio button is selected , so courses can be displayed based on selection. 
+            - After gettong value of "courseCountRadioButton" , from child using event and @Output decorator , we can use that for filtering.
+            - We can filter course types using *ngIf directive on table , but we can't use 2 directives on 1 tag, so 
+                using <ng-container></ng-container> we can split directives for same content.
+            - now we can filter out the data based on value of button.
+                <tr *ngIf="courseCountRadioButton === 'all' || course.type === courseCountRadioButton">
+            - Row will be displayed if this condition satisfies.So courses will be displayed based on radio button value.
+
+
+                ---------------------------------------------------------------------------
+                a) search component : have search input as text , to search the courses
+                    *searchValue:string="";
+                    *@Output() searchValueEmitter:EventEmitter<string> = new EventEmitter<string>();    
+
+                        <input type="text" [(ngModel)]="searchValue" (keyup)="searchCourses()">
+                    - This input value is bounded to "searchValue" , and whenever any keyboard event is there in search box,
+                        it will call "searchCourses()" method , and inside that method , "searchValueEmitter" will emit value 
+                        of "searchValue".
+                    - In parent , we are binding this "searchValueEmitter" event , and calling "searchCourses()" method 
+                        with input text value , and will assign to "searchValue" param of parent comp.
+                            <app-search
+                                (searchValueEmitter)="searchCourses($event)">
+                            </app-search>
+                    
+                    - inside parent template file , we are filtering displaying courses whose course name includes 
+                        entered text in search box.
+                        - and also filtering for radio button value also in single *ngIf condition.
+
+                            <tr *ngIf="( searchText === '' || (course.name|lowercase).includes((searchText|lowercase)) )
+                                        && (courseCountRadioButton === 'all' || course.type === courseCountRadioButton) ">
+                                <td>{{course.id}}</td>
+                                <td>{{course.name}}</td>
+                                <td>{{course.price}}</td>
+                                <td>{{course.type}}</td>
+                                <button>Select Course</button>
+                            </tr>
+
+                ---------------------------------------------------------------------------
+                b) filter component : have 3 input radio buttons - "All courses (n)","Free courses (n)","premium courses (n)"
+                    *all:number
+                    *free:number
+                    *free:number
+                    *selectedRadioButtonValue:string = "All";
+                    *@Output() filterRadioButtonSelectionChanged : EventEmitter<string> ;
+
+                    - count of courses we have to take from courses component to display here.
+                    - to take data from "courses" component , import "Input" from @angular/core.
+                    - the property want to take as input from parent , have to decorate them with @Input().
+                        @Input('all') all:number=0;
+                        @Input('free') free:number=0;
+                        @Input('premium') premium:number=0;
+
+                    - so here have to bind this properties with methods of parent components - "getTotalCourses()",
+                        "getTotalFreeCourses()","getTotalPremiumCourses()"
+                    - and in parents template file , we can bind this child's properties with parents methods. 
+                        <app-filter [all]="getTotalCourses()" 
+                                    [free]="getTotalFreeCourses()" 
+                                    [premium]="getTotalPremiumCourses()"
+                                    (filterRadioButtonSelectionChanged)="onFilterRadioButtonChanged($event)">>
+                        </app-filter>
+                    
+                    - we can give alias names to that properties inside input decorator , @Input("all") , the same name 
+                        can be used to bind this property in parent's template.
+                    
+                    
+                    - Now whatever radio button selected , that value we have to send to parent component.We can bind 
+                        radio buttons with property "selectedRadioButtonValue", so value will get assign to that property.
+                            [(ngModel)]="selectedRadioButtonValue"
+                    - Now have to create eventEmitter object , which emitts string, and decorate it with @Output decorate.
+                        
+                        @Output() 
+                        filterRadioButtonSelectionChanged : EventEmitter<String> = new EventEmitter<String>();
+                    
+                    - And have to create method to raise this event. and emit value of radio button .Also have bind this
+                        method with change event :  
+
+                        (change)="onRadioButtonSelectionChanged()"
+                        onRadioButtonSelectionChanged(){
+                            this.filterRadioButtonSelectionChanged.emit(this.selectedRadioButtonValue);
+                        }
+
+                    - Whenever "filterRadioButtonSelectionChanged" event is raised , we can detect that event in parent's 
+                        template file , and can bind that event with parent's method.
+                            (filterRadioButtonSelectionChanged)="onFilterRadioButtonChanged($event)">
+                    - data emited by event is stored inside "$event" and can passed to method to assign to parent property.
+                    - inside "onFilterRadioButtonChanged()" this method , we can assign input data to "courseCountRadioButton"
+                        this property of parent.
+                    - After getting value of radio button , we can use that for filtering types.
+                    
+
+
+        ------------------------------------------------------------------------------------
+        2) Header : displays the header of the page.
+
+

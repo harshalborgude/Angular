@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class CustomFilePipeComponent implements OnInit {
 
   file = {name : 'logo.png', size:2120109 , type:'image/png'};
-  
+  marks = 200;
+  totalMarks = 400;
   constructor() { }
 
   ngOnInit(): void {

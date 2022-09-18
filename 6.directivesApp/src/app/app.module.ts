@@ -9,6 +9,8 @@ import { IfelseComponent } from './ifelse/ifelse.component';
 import { NgswitchComponent } from './ngswitch/ngswitch.component';
 import { NgforComponent } from './ngfor/ngfor.component';
 import { NgforobjectComponent } from './ngforobject/ngforobject.component';
+import { ViewChildDecoratorComponent } from './view-child-decorator/view-child-decorator.component';
+import { DemoForViewChildComponent } from './demo-for-view-child/demo-for-view-child.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { NgforobjectComponent } from './ngforobject/ngforobject.component';
     IfelseComponent,
     NgswitchComponent,
     NgforComponent,
-    NgforobjectComponent
+    NgforobjectComponent,
+    ViewChildDecoratorComponent,
+    DemoForViewChildComponent
   ],
   imports: [
     BrowserModule

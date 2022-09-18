@@ -1,0 +1,160 @@
+import { Pipe, PipeTransform } from "@angular/core";
+
+
+===============================================================================================================================================
+Pipes : https://angular.io/api?query=pipe
+
+    - Pipes in angular are used to transform data before displaying it in the view , Angular pipes takes data as input and formats or transform 
+        the data to display it in the template.
+    
+    Built in Pipes are :
+        1) Date Pipe : formats the date value according to locale rules.
+                        {{ dateVal | date: 'shortTime' }} -> 4.38 PM
+        2) UpperCasePipe : Transforms text to all upper case
+                        {{ 'harshal'| uppercase }} -> HARSHAL
+        3) LowerCasePipe : Transforms text to all lower case
+                        {{ 'HARSHAL'| lowercase }} -> harshal
+        4) CurrencyPipe : Transforms a number to a currency string , formatted according to a locale rule.
+                        {{ 1234.3 | currency:'CAD' }} -> CA$1,234.3
+                        code , symbol , symbol-narrow are the secondary pipes.
+        5) Decimal Pipe : Transforms a number into a string with a decimal point , formatted according to locale rule.
+                        {{ 3.141324324 | number:'3.1-2' }} -> 003.14
+                        {{ 3.141324324 | number:'1.4-4' }} -> 3.1413
+                        -2 means 2 decimals
+        6) PercentPipe : Transforms a number to a Percentage string , formatted according to locale rule.
+                        {{ 0.1213478 | Percent }} -> 12.134%
+                        {{ 0.1213478 | Percent: '2.1-2' }} -> 12.14%
+                        2.1-2 means 2 digits and 2 decimal places. 
+
+
+====================================================================================================================
+Custom pipe ( Pure by Default ) : 
+
+    - Create a class and implement "PipeTransform" interface also implement a "transform" method.
+    - Decorate that class with @Pipe decorator and provide metadata as json object as name of pipe.
+    - inside @Pipe , "pure:true" bydefault
+        @Pipe({
+            name: 'percentage'
+        })
+        export class percentagePipe implements PipeTransform{
+            transform(value: number, totalMarks:number, decimal:number) {
+                return ((value/totalMarks) *100).toFixed(decimal);
+            }
+        }
+    - then import that in app.module file. and use under "declarations : [percentagePipe]"
+    - then can use that pipe in any template file like, the name specified in decorator should be use as pipe.
+         <p>{{ marks | percentage : totalMarks }}%</p>
+         - marsks : 1st argument to percentagePipe class.
+         - totalMarks : 2nd argument
+         
+    - we can also pass second arguments to pipes , have to define using colon (:)
+        <p>Percentage : {{ marks | percentage : totalMarks : 2 }}%</p>
+        - 2 : 3rd argument
+        - here marks is first agrument and total marks is second argument to transform method of pipe.
+
+-----------------------------------------------------------------------------------------------------------------
+Filter Pipe : ( genderFilter.pipe.ts ) 
+
+    - This filter will take gender as input and out of all the genders , it will show only entered gender ,
+        and full list if the input is blank.
+    - Here we are creating a table and in showing all the "students" array using "*ngFor".
+            <table>
+                <tr>
+                <th>name</th>
+                <th>gender</th>
+                </tr>
+                <tr *ngFor="let student of students | genderFilter :filterText">
+                <td>{{student.name}}</td>
+                <td>{{student.gender}}</td>
+                </tr>
+            </table>
+    - here "genderFilter" is a pipe , which is taking "filtertext" as a input argument and filter whole array with "gender"
+    - But it is recommended to not use pipe for filter and sort the data.As it can effect the performance of the application.
+    
+--------------------------------------------------------------------------------------------------------------------
+Pure Pipe : 
+
+    - whenever we create any pipe in angular , that pipe is bydefault a "pure pipe"
+    - we can make pipe , pure or impure by making "pure" as true/false in @Pipe decorator.
+        @Pipe({
+            name : "pipeName",
+            pure : true
+        })
+        - pure : true => pure pipe ( Default )
+        - pure : false => impure pipe
+    - whenever input value to pipe changes , and that if that change is pure change then pure pipe is get executed.If that is not a pure change 
+        then that pipe will not get called.
+    
+    * what is the pure change ?
+        - a change of primitive input values (string , boolean , number , etc), if those value changes then it considered as a pure change.
+        - So if there is any change in primitive data vars , then to each change , pure pipe gets called , input change can be either in component 
+            or from template in any of the input value which is binded with property of component.
+        - A pure change is also a change in reference of reference types (Array , Objects , Functions etc)
+        - If we are adding any new element in Objects or arrays then that will consider as "impure change" , as that pipe is refering to same 
+            object reference and that is not changed.
+        - So in case of Objects or arrays , if we assign any new Object or Array to old Object or Array then only pure pipe will consider it as 
+            pure change as because of assigning , reference have changed.
+    
+    - Pure pipes are very fast and better in performance.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Impure Pipe : 
+
+    - can make pipes as impure by setting (pure : false) in metadata of pipe.
+        @Pipe({
+            name : "myPipe",
+            pure : false
+        })
+    - Impure pipes gets executed on every change detection cycle , so whatever task you are doing that have been done on every change detection 
+        cycle.
+    - even if source data is not changed  , then also impure pipe is get called.
+    - means any of event trigger in DOM , lets say mouse move event , that is not changing any data , then also impure pipe will get called.
+    - So impure pipe is not good for performance.
+
+    - So angular team recommend not to use pipe for filter and sort data.
+        - as pure pipe will not detect changes , so will not work properly.
+        - and impure pipe will do sort and filter operation on every change detection cycle.
+    - So filtering and sorting logic we have to move in component itself , instead of using pipes.
+
+
+=====================================================================================================================
+Filtering Data : 
+
+    - In component file have created two property 
+        filteredStudents:Student[] =[];
+        filterText2:string="";
+    - filterText2 value assigned with input property with two way binding. [(ngModel)]="filterText2"
+    - on submit button "filterStudentByGenders()" this method will be called , inside this method 
+        - "students" array will be filtered by "filterText2" i.e gender and will assigned back to "filteredStudents"
+    - 
+
+====================================================================================================================
+Async Pipe :
+
+    - We use "Async pipe" to handle asynchronous data , Observable returns async data.
+    - Some properties are there , that we have used , but may be we will not get data immediately.
+    - for demo can use a promise , that will return data after some time.
+
+        totalStudents = new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+            resolve(this.students.length);
+            },2000);
+        }) 
+
+        <h3>Total Students :{{totalStudents | async }}</h3>
+
+    - So to display total students , which is asynchronous data.We have to use async pipe.So by this,it will display data whenever it recieves it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

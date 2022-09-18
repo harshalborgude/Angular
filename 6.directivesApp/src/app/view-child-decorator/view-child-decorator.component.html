@@ -1,0 +1,19 @@
+-----------------------------------------------------------------------------------------------------------------
+<h2>view-child-decorator</h2>
+<div>
+    <label>DOB :</label>
+    <input type="date" #dobInput (blur)="calculateAge()"> <br>
+</div>
+<div>
+    <label>Age :</label>
+    <input type="text" #ageInput>
+</div>
+
+<app-demo-for-view-child></app-demo-for-view-child>
+<!-- this demoComp is of type @ViewChild and points to DemoForViewChildComponent component , in that "sayHello()" method is there -->
+{{demoComp.sayHello()}}
+
+
+
+
+

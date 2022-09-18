@@ -76,7 +76,7 @@ Directives :
             
 
 - In structural directives like ngIf, ngIfElse , ngFor - * (asterisk / shorthand) syntax is always used before directive.
-- This asterisk tells angular that this is a structural directive. So internally angular wraps that view inside 
+- This asterisk tells angular that this is a structural directive. So internally angular wraps that view inside "ng-template"
     <ng-template [ngIf]="true/false"> 
         html-view-content 
     </ng-template>
@@ -84,5 +84,69 @@ Directives :
 
 
 =========================================================================================
+@ViewChild Decorator :   import { ViewChild } from '@angular/core';
+
+    - Using view child we can get access to component , tags ,DOM elements.
+    - @ViewChild is used to access html element, component or directives from html view template to a component class.
+    - @ViewChild property is of "ElementRef" type.
+
+         @ViewChild('dobInput') dateOfBirth:ElementRef
+
+    - now "dateOfBirth" refers to "dobInput" local refernce variable.It is of Tipe type of "ElementRef".
+    - When we click on "dateOfBirth" input, then "focus" event happens , 
+    - when we click outside date , then "blur" event happends. 
+    - ElementRef have property inside it i.e "nativeElement" and inside native element we can get actual element.
+            let birthYear = new Date(this.dateOfBirth?.nativeElement.value);
+    
+    * Accessing child component using @ViewChild 
+    - By using classname of child component we can access that using @ViewChild 
+        @ViewChild(DemoForViewChildComponent,{static:true}) demoComp:ElementRef;
+    - now using "demoComp" we can access all the properties and methods of that class.
+        {{demoComp.sayHello()}}
+    - So Here we have access child component's method.
+
+====================================================================================================================
+View Encapsulation : 
+
+    - The View Encapsulation us a concept or behaviour in angular, where component CSS styles are Encapsulated into the 
+        components view and do not affect the rest of the application.
+    - Css file of app component will be applied only on html file of app component , will not applied on child components.
+        This is called as view Encapsulation in angular
+
+    - In angular 3 types of view Encapsulation is there ,
+        1) ViewEncapsulation.None
+        2) ViewEncapsulation.Emulated - Default - view encapsulation achieved by adding unique classes.
+        3) ViewEncapsulation.ShadowDOM
+
+        - By default angular uses Emulated Encapsulation , 
+    - So by this , angular internally adds some classes in html tags , and css for that element will be only applied
+        to that class added by angular. That's why that css class angular makes it very specific to perticular html 
+        element.
+        
+        button[_ngContent-oni-c12]{
+            color: black;
+        }
+    - So here "_ngContent-oni-c12" this is added by angular and this will be unique for each angular class.
+    - To Change ViewEncapsulation , We can add property in @component
+        styleUrls:[style.css],
+        encapsulation: ViewEncapsulation.None
+    - ViewEncapsulation.ShadowDOM : 
+        - The component on which we have added shadow DOM , That component created its own DOM , 
+        - browser keeps that component's DOM separate from main DOM.
+        - Rendering of main DOM and ShadowDOM happens separately.
+        - So view of one component does not affect another , and we can achieve true view encapsulation.
+
+================================================================================================================================================
+ng-content :
+
+    - The ng-content is used when we want to insert the content dynamically inside the component,that helps to increase component reusability.
+    - Using ng-content we can pass content inside the component selector and when angular parses that content that appears at the place of 
+        ng-content.
+
+
+
+
+
+
 
 

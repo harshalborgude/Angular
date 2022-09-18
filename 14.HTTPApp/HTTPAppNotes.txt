@@ -16,7 +16,7 @@ firebase URL : https://angularbackendhrb-default-rtdb.firebaseio.com/
 3) With the instance of http (HttpClient) , we can make http requests.
     constructor(private http : HttpClient){ }
 
-4) In Pots requests , in body , we can provide objects , those objects will be converted into JSON format bydefault by post method.
+4) In Post requests , in body , we can provide objects , those objects will be converted into JSON format bydefault by post method.
     - Post request will return the observable, So observable emmit the data only when there is subscriber.
     - untill subscriber is not there , post request will not completed.
 5) When we send "Post" request , browser always sends 2 requests, This is default behaviour of browser.
