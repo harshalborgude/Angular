@@ -1,15 +1,70 @@
 
 Directives : 
 
+    - Directives are simply and instruction to the DOM.
     - Directives are used to manipulate DOM elements.( Document Object Model )
+
+    1) Component Directives: 
+        - @Component({templateUrl:app.html}) is a directive with a template.
+        - The component directives are used to form the main class in directives. To declare these directives, 
+            we have to use the @Component decorator instead of @Directive decorator. These directives have a view,
+            a stylesheet and a selector property.
+
+	2) Structural directives: 
+        - These directives are generally used to manipulate DOM elements. The structural directive has a ' * ' 
+            sign before them. We can apply these directives to any DOM element. 
+        Ex : *ngIf , *ngFor
+                       
+		Following are some example of built-in structural directives:
+
+		*ngIf Structural Directive: 
+            - *ngIf is used to check a Boolean value and if it's truthy, the div element will be displayed.
+                <div *ngIf="isReady" class="display_name">  
+                {{name}}  
+                </div>  
+			
+		*ngFor Structural Directive: 
+            - *ngFor is used to iterate over a list and display each item of the list.
+                <div class="details" *ngFor="let x of details" >  
+                    <p>{{x.name}}</p>  
+                    <p> {{x.address}}</p>  
+                    <p>{{x.age}}</p>  
+                </div>  
+
+        *ngSwicth
+
+	3) Attribute Directives: 
+        - The attribute directives are used to change the look and behavior of a DOM element. 
+            EX : style , ngClass
+
+        Let's create an attribute directive to understand it well:
+	    - This is how we can create a custom directive:
+		- Go to the command terminal, navigate to the directory of the angular app and type the following command to generate a directive:
+			ng g directive yellowBackground   
+		
+		This will generate the following directive. Manipulate the directive to look like this:
+
+			import { Directive, ElementRef } from '@angular/core';  
+
+			@Directive({  
+			 selector: '[appYellowBackground]'  
+			})  
+			export class YellowBackgroundDirective {  
+			 constructor(el:ElementRef) {  
+			   el.nativeElement.style.backgroundColor = "yellow";  
+			 }  
+			} 
+
+            
+------------------------------------------------------------------------------------------------------------
+
     - Angular have several predefined Directives.
         1) Style
         2) ngClass
         3) ngFor
         4) ngIf and else
         5) ngSwitch
-        6) ngFor  
-    
+
 -------------------------------------------------------------------------------------------------------------------
     1) Style : style directive is used to set CSS property value dynamically at runtime.
                 - When value of the component property is changed the value of the css property will be changed automatically.
@@ -83,19 +138,77 @@ Directives :
 - So This conversion internally taken place, there angular removes that asterisk and make it like other directives.
 
 
-=========================================================================================
-@ViewChild Decorator :   import { ViewChild } from '@angular/core';
+=====================================================================================================================
+ Custom Attribute Directive : setBackground    : import { Directive, ElementRef } from "@angular/core";
+
+    - created folder "customDirectives" in appComponent, and creating setBackground.directive.ts to create setBackground directive.
+    - we can create class setBackground and use decorator @Directive to that class , and add selector property there, The name given 
+        in selector property can be use as a directive now.
+    - we have to use this selector as a attribute so need to wrap that in square brackets so can be used on html element or component.
+        also can be used as a html or css by wrapping in different styles.
+    - inside that directive class have to use constructor that accept "ElementRef" type.
+    - On whichever component we have used this directive that whole component will be passes to constructor of directive class.
+    - Now to use it in another component,have to register this class with appModule inside declarations.
+    - After registering just use that directive on the tag or component have to apply it.
+    - The logic of directive should be written in "ngOnInit" method.
+    - We can create private var of ElementRef in directive class and in constructor can assign value to it, but the 
+        same can be done by just writting private in constructor, declaration and assignment task will be done by 
+        angular. 
+
+            @Directive({
+                selector: '[setBackground]'
+            })
+            export class setBackground {
+                constructor(private element:ElementRef) { }  
+                ngOnInit(){
+                    this.element.nativeElement.style.backgroundColor = "green";  
+                }
+            }
+            
+    - But it is not recmmended to access DOM directly using nativeElement , we can use "Renderer" to manipulate
+        DOM elements.
+
+
+==================================================================================================================
+Renderer2 : 
+
+        ng generate directive highLight
+    - we can go into "customDirectives" path and use cmd to generate directive.
+    - For using Renderer we have to recieve "Renderer2" parameter with "ElementRef" param.
+    - Renderer2 allows us to manipulate DOM without Accessing DOM directly, It provides layer of abstraction
+        between DOM element and component code.
+    - This Renderer can be used to set CSS styles of HTML element or can add css class or can set aatributes.
+    - now by using this directive we can change backgroundColor color.
+            @Directive({
+            selector: '[appHighLight]'
+            })
+            export class HighLightDirective {
+            constructor(private element:ElementRef,private renderer : Renderer2) { }
+            ngOnInit(){
+                this.renderer.setStyle(this.element.nativeElement,'backgroundColor','Red');
+                 this.renderer.addClass(this.element.nativeElement,'directiveDemo');
+                }
+            }
+    - addStyle and addClass are being used to add styles and classes.
+        <p appHighLight>Demo paragraph for setBackground</p>
+        
+    - So by this "appHighLight" directive , it will set "backgroundColor" to red and css class or "directiveDemo"
+    
+==================================================================================================================
+ @ViewChild Decorator :   import { ViewChild } from '@angular/core';
 
     - Using view child we can get access to component , tags ,DOM elements.
     - @ViewChild is used to access html element, component or directives from html view template to a component class.
     - @ViewChild property is of "ElementRef" type.
 
-         @ViewChild('dobInput') dateOfBirth:ElementRef
+         @ViewChild('dobInput') dateOfBirth:ElementRef;
 
+    - "dateOfBirth" is local reference variable.
     - now "dateOfBirth" refers to "dobInput" local refernce variable.It is of Tipe type of "ElementRef".
     - When we click on "dateOfBirth" input, then "focus" event happens , 
     - when we click outside date , then "blur" event happends. 
     - ElementRef have property inside it i.e "nativeElement" and inside native element we can get actual element.
+           
             let birthYear = new Date(this.dateOfBirth?.nativeElement.value);
     
     * Accessing child component using @ViewChild 
@@ -105,46 +218,40 @@ Directives :
         {{demoComp.sayHello()}}
     - So Here we have access child component's method.
 
+
 ====================================================================================================================
-View Encapsulation : 
+ @ContentChild :
 
-    - The View Encapsulation us a concept or behaviour in angular, where component CSS styles are Encapsulated into the 
-        components view and do not affect the rest of the application.
-    - Css file of app component will be applied only on html file of app component , will not applied on child components.
-        This is called as view Encapsulation in angular
-
-    - In angular 3 types of view Encapsulation is there ,
-        1) ViewEncapsulation.None
-        2) ViewEncapsulation.Emulated - Default - view encapsulation achieved by adding unique classes.
-        3) ViewEncapsulation.ShadowDOM
-
-        - By default angular uses Emulated Encapsulation , 
-    - So by this , angular internally adds some classes in html tags , and css for that element will be only applied
-        to that class added by angular. That's why that css class angular makes it very specific to perticular html 
-        element.
+    - lets take app and demo component , demo is a child component. 
         
-        button[_ngContent-oni-c12]{
-            color: black;
-        }
-    - So here "_ngContent-oni-c12" this is added by angular and this will be unique for each angular class.
-    - To Change ViewEncapsulation , We can add property in @component
-        styleUrls:[style.css],
-        encapsulation: ViewEncapsulation.None
-    - ViewEncapsulation.ShadowDOM : 
-        - The component on which we have added shadow DOM , That component created its own DOM , 
-        - browser keeps that component's DOM separate from main DOM.
-        - Rendering of main DOM and ShadowDOM happens separately.
-        - So view of one component does not affect another , and we can achieve true view encapsulation.
+        // app.html : app component template
+            <div>
+                <app-demo>
+                    <p #paragraph> This is a paragraph </p>
+                </app-demo>
+            </div>    
 
-================================================================================================================================================
-ng-content :
+        // demo.html : demo component template
+            <div>
+                <ng-content></ng-content>
+            </div>
 
-    - The ng-content is used when we want to insert the content dynamically inside the component,that helps to increase component reusability.
-    - Using ng-content we can pass content inside the component selector and when angular parses that content that appears at the place of 
-        ng-content.
+        // demo.ts : demo component 
+            @ContentChild('paragraph') paragraphEl:ElementRef;
 
+            ngAfterContentInit(){
+                console.log(paragraphEl.nativeElement.textContent);
+                paragraphEl.nativeElement.textContent = "This is new paragraph!";
+            }
 
-
+    - The paragraph passed between <app-demo> selector will get displayed in demo.html file of demp component.
+    - but if we wanted to access content enclosed between <app-demo> selector inside child component(demo),
+        then we can use "@ContentChild" decorator inside child component class.
+    - Everything is same as "@ViewChild()" , just its used for projected content in child component.
+    - content decorated with @ContentChild, @ViewChild, @ContentChildren, @ViewChildren get initialized just before
+        "ngAfterContentInit()" method.this contet will not be available till "ngOnInit()".
+    - inside textContent we can get text content of paragraph.Also using same we can assign new content to it.
+    
 
 
 

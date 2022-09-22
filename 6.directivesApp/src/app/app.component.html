@@ -8,3 +8,35 @@
 <app-ngswitch></app-ngswitch>
 
 <app-view-child-decorator></app-view-child-decorator>
+
+<div class="directiveDemo" appHover>
+    <!-- Demo for setBackground directive -->
+    <h2>Custom directive demo : setBackground to green</h2>
+    <p setBackground>Demo paragraph for setBackground</p>
+</div>
+
+<div appHighLight appHover>
+    <!-- Demo for appHighLigh and appHover directive -->
+    <p >Demo paragraph for appHighLight and appHover</p>
+</div>
+
+<!-- Here 'yellow' is a string which directly assigned to "defaultColor" and "highlighColor" is a property of app.component 
+        which is binded with "highlighColor" property of "appBetterhighlight" decorator using @Input decorator -->
+<div appBetterhighlight [defaultColor]="'yellow'" [highlighColor]="highlighColor">
+    <!-- Demo for @HostBinding directive -->
+    <p >Demo paragraph for @HostBinding</p>
+</div>
+
+<!-- Whichever condition is true , that class will be applied -->
+<!-- <div [ngClass]="{class1:true ,class2:false}"> -->
+    <!-- here inside appClass directive , this display property is there -->
+<!-- <div appClass [display]="{container:true , 'change-font':true }"> -->
+<div [appClass]="{container:true , 'change-font':true }">
+    <p>This is a demo HTML content to understand creating ngClass directive</p>
+</div>
+
+
+
+
+
+

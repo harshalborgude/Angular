@@ -1,0 +1,14 @@
+.directiveDemo{
+    border: 2px solid black;
+}
+
+.container{
+    margin: 10px 20px;
+    padding: 10px 20px;
+    background-color: aqua;
+}
+
+.change-font{
+    font-size: 17px;
+    font-family: 'Courier New', Courier, monospace;
+}

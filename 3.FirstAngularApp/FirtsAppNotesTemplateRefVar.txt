@@ -35,6 +35,144 @@
         So operation will not takes place if any value is null.
 
 
+=========================================================================================
+ @ViewChild Decorator :   import { ViewChild } from '@angular/core';
+
+    - Using view child we can get access to component , tags ,DOM elements.
+    - @ViewChild is used to access html element, component or directives from html view template to a component class.
+    - @ViewChild property is of "ElementRef" type.
+
+         @ViewChild('dobInput') dateOfBirth:ElementRef
+
+    - "dateOfBirth" is local reference variable.
+    - now "dateOfBirth" refers to "dobInput" local refernce variable.It is of Tipe type of "ElementRef".
+    - When we click on "dateOfBirth" input, then "focus" event happens , 
+    - when we click outside date , then "blur" event happends. 
+    - ElementRef have property inside it i.e "nativeElement" and inside native element we can get actual element.
+           
+            let birthYear = new Date(this.dateOfBirth?.nativeElement.value);
+    
+    * Accessing child component using @ViewChild 
+    - By using classname of child component we can access that using @ViewChild 
+        @ViewChild(DemoForViewChildComponent,{static:true}) demoComp:ElementRef;
+    - now using "demoComp" we can access all the properties and methods of that class.
+        {{demoComp.sayHello()}}
+    - So Here we have access child component's method.
+
+
+====================================================================================================================
+ @ContentChild :
+
+    - lets take app and demo component , demo is a child component. 
+        
+        // app.html : app component template
+            <div>
+                <app-demo>
+                    <p #paragraph> This is a paragraph </p>
+                </app-demo>
+            </div>    
+
+        // demo.html : demo component template
+            <div>
+                <ng-content></ng-content>
+            </div>
+
+        // demo.ts : demo component 
+            @ContentChild('paragraph') paragraphEl:ElementRef;
+
+            ngAfterContentInit(){
+                console.log(paragraphEl.nativeElement.textContent);
+                paragraphEl.nativeElement.textContent = "This is new paragraph!";
+            }
+
+    - The paragraph passed between <app-demo> selector will get displayed in demo.html file of demp component.
+    - but if we wanted to access content enclosed between <app-demo> selector inside child component(demo),
+        then we can use "@ContentChild" decorator inside child component class.
+    - Everything is same as "@ViewChild()" , just its used for projected content in child component.
+    - content decorated with @ContentChild, @ViewChild, @ContentChildren, @ViewChildren get initialized just before
+        "ngAfterContentInit()" method.this contet will not be available till "ngOnInit()".
+    - inside textContent we can get text content of paragraph.Also using same we can assign new content to it.
+    - 
+
+====================================================================================================================
+ View Encapsulation : 
+
+    - The View Encapsulation us a concept or behaviour in angular, where component CSS styles are Encapsulated into the 
+        components view and do not affect the rest of the application.
+    - Css file of app component will be applied only on html file of app component , will not applied on child components.
+        This is called as view Encapsulation in angular
+
+    - In angular 3 types of view Encapsulation is there ,
+        1) ViewEncapsulation.None
+        2) ViewEncapsulation.Emulated - Default - view encapsulation achieved by adding unique classes.
+        3) ViewEncapsulation.ShadowDOM
+
+        - By default angular uses Emulated Encapsulation , 
+    - So by this , angular internally adds some classes in html tags , and css for that element will be only applied
+        to that class added by angular. That's why that css class angular makes it very specific to perticular html 
+        element.
+        
+        button[_ngContent-oni-c12]{
+            color: black;
+        }
+    - So here "_ngContent-oni-c12" this is added by angular and this will be unique for each angular class.
+    - To Change ViewEncapsulation , We can add property in @component
+        styleUrls:[style.css],
+        encapsulation: ViewEncapsulation.None
+    - ViewEncapsulation.ShadowDOM : 
+        - The component on which we have added shadow DOM , That component created its own DOM , 
+        - browser keeps that component's DOM separate from main DOM.
+        - Rendering of main DOM and ShadowDOM happens separately.
+        - So view of one component does not affect another , and we can achieve true view encapsulation.
+
+================================================================================================================================================
+ ng-content : content projection
+
+    - The ng-content is used when we want to insert the content dynamically inside the component,that helps to increase component reusability.
+    - Using ng-content we can pass content inside the component selector and when angular parses that content that appears at the place of 
+        ng-content.
+    
+    - lets say we have app component and demo component.<app-demo> is tag of demo component.
+    - app component can show information of 1 component, It will be having title , description and button.
+    - inside app.html file , we want to display 4 demos so will repeate tag of demo-component 4 times ,
+        but title we want different for that component, so we will pass one paragraph tag to each component.
+
+            // app.html
+            <div>
+                <app-demo>
+                    <p class="name"> demo 1 </p>
+                    <button class="btn">Show More</button>
+                </app-demo>
+                <app-demo></app-demo>
+            </div>    
+
+            // demo.html
+            <div>
+                <ng-content></ng-content>
+                <p> demo description </p>
+                <p> price </p>
+            </div>
+
+    - So in place of "<ng-content></ng-content>" whatever content we are passing inside selector of that component 
+        will get displayed.
+        This "ng-content" will get replaced by that paragraph tag.
+    - we can pass multiple tags to that component , that will also get replaced as it is in place of "ng-content" tag.
+    - if multiple "ng-content" tags are there , then angular will replace only last occurance of "ng-content".
+    - If we are passing multiple tags , and dont want to display all those tags in single block , and want to show 
+        them distributedly then we have to make use of classes from that tags.
+
+        // demo.html
+        <div>
+            <ng-content select=".name"></ng-content>
+            <p> demo description </p>
+            <p> price </p>
+            <ng-content select=".btn"></ng-content>
+        </div>
+
+
+
+
+
 
 
 

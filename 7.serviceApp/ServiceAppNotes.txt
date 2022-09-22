@@ -29,16 +29,16 @@ Services :
         }
         // This component will make use of service
         public class ComponentOne{ 
-            @Inject UserService;
+            constructor( private userService : UserService ){ }
              //business logic
         }
         // This component will make use of service
         public class ComponentTwo{
-            @Inject UserService;
+            constructor( private userService : UserService ){ }
              //business logic
         }
 
-    - generate service using : ng generate Welcome
+    - generate service using : ng generate service Welcome
     - In app.module.ts file , add service class in "provider" section, also have to import it in the same file.
     - or we have to add that service in "providers" of that specific component where we are making use of it in @Component decorator.
         By this way that coponent will get to know the required dependancies to be injected.

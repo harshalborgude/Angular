@@ -1,0 +1,112 @@
+
+
+===================================================================================================================
+ @HostListener : hover.directive.ts 
+
+    - the @HostListener decorator listens to the DOM event on the host element and it reacts to that event by 
+        executing and event handler method.
+    - Here we have created 1 directive "hover.directive" with selector of "appHover" and inside constructor we are receiving
+        2 arguments  - constructor(private element : ElementRef , private renderer : Renderer2) { }
+    - We have defined "onMouseHover()" method and using this, we are accessing dom and changing css properties.
+        @HostListener("mouseenter") onMouseHover(){
+            this.renderer.setStyle(this.element.nativeElement,'padding','4px 9px');
+            this.renderer.setStyle(this.element.nativeElement,'transition','0.7s');
+        }
+        @HostListener("mouseleave") onMouseOut(){
+            this.renderer.setStyle(this.element.nativeElement,'margin','10px 20px');
+            this.renderer.setStyle(this.element.nativeElement,'padding','10px 20px');
+            this.renderer.setStyle(this.element.nativeElement,'transition','0.7s');
+        }
+    - So using @HostListener("mouseenter") we will listen to mouseenter event and upon that , styles will be set.
+    - also have used another method for "onMouseOut" event , then the div where we are using this will go back to it's
+        actual possition on "mouseleave" event.
+    - This is how @HostListener listens to DOM events and executes the event handler methods accordingly.
+    - So wherever we are using this "appHover" directive , this all methods will be implemnted on that element as per event.
+
+
+==========================================================================================================================
+ @HostBinding : betterhighlight.directive.ts 
+
+    - The @HostBinding decorator binds a host element property to a variable in a directive or a component.
+    - in betterhighlight directive , background property is get binded with "appBetterhighlight" directive,This css
+        property will be applied on the element where this directive have been used.
+
+         @HostBinding('style.backgroundColor') background:string ="blue";
+    - so using this , we can bind property of directive class with property of HTML element.
+
+    * Binding Directive Properties :
+    - We can bind those directive properties with @Input() decorator so we can bind that with component file.
+    - here "defaultColor" and "highlighColor" have binded in app.html file , there we can provide strings directly or we 
+        can bind bind with other properties of app.ts file.
+    
+    - "appBetterhighlight" this selector name is used in template file to implement that directive.But we can also 
+        bind any perticular property of that directive so that selector we can bind inside [appBetterhighlight] and 
+        assign any value to that default property.
+
+        @Input("appBetterhighlight") highlightColor: string = "pink";
+
+        - so highlighColor property also will have same alias name as directive name so in such case we will have 
+            to use 
+            <div [appBetterhighlight]="'red'" [defaultColor]="'yellow'" [highlighColor]="highlighColor"> </div>
+
+        - so this "red" value will be assigned to highlightColor property.
+        - now here [highlighColor] property we can not use as it have alias "appBetterhighlight".
+        - the same way ngStyle directive also works.
+
+
+====================================================================================================================
+Custome appClass (ngClass) Directive : class.directive.ts
+
+    - as in "ngClass" directive , we can provide more that one classes based on conditions and whichever condition 
+        is true , that class will be applied on directive.
+            <!-- <div [ngClass]="{class1:condition1 ,class2:condition2}">
+
+    - we can create same Custome directive.Which can function same as "ngClass" directive.
+    - So for that creating directive "appClass" ,created directive and add that name as selector inside @Directive()
+    - inside that directive class can create instances of "ElementRef" and "Renderer2" in constructor , also can create 
+        "display" method.
+    - We have to decorate this "display" method with @Input() decorator so it will be binded to that property.
+        this display method will now accept parameters as object. and we can bind that property in template file
+        and can send object to binded method.
+            <div appClass [display]="{container:true , 'change-font':true }">
+
+            @Input() set display(value:Object){
+                let entries = Object.entries(value);
+                // for(let entry of entries){
+                for(let [className,condition] of entries){
+                    if(condition){
+                        this.renderer.addClass(this.element.nativeElement , className);
+                    }
+                }
+            }
+    - So object binded with display method will be passed to "display()" method and will be received in value object,
+        and by iterating through entries array , will check each keys value weather true or false , if true then 
+        that class key will be get applied on that div by using "renderer.addClass" using "element.nativeElement"
+    - In template file , if appClass directive is not provided before display method, then "display" method will not
+        be recognizable.ANgular will check this display property for that div element and will not able to figure out 
+        that it is from "appClass" directive.
+    - So now if we want to assign that object to directive name it selft then
+         @Input('appClass') set display(value:Object){ }
+         - here in @Input directive we can provide alias name same as selector of the directive.
+
+         <div [appClass]="{container:true , 'change-font':true }">
+         - then can bound that appClass directive itself and assign the conditions object to binded method.
+            and can process inside that directive method.
+    - Other option is to name that class of directive same as directive selector name , then also we can bind that 
+        directive like [ngClass]="" -> [appClass]="class:condition" 
+
+
+
+
+
+=====================================================================================================================
+
+
+
+
+
+
+
+
+
+

@@ -9,6 +9,7 @@
 2) Advantages of using angular 
 	- Angular supports two-way data-binding.
 	- It provides support for dependency injection.
+	- implementing routing is easy in angular.
 	- It also supports RESTfull services.
 	- Validations are supported in Angular.
 	- It follows MVC pattern architecture.
@@ -42,10 +43,10 @@
 	1) ngOnChanges : This method is called when one or more input properties of the component are changed. The hook receives a SimpleChanges object containing 
 					the previous and current values of the property.
 					
-		5)  ngAfterContentinit	: This hook is called after the first ngDoCheck hook. This hook responds after the content gets projected inside the component.
+		5) ngAfterContentinit	 : This hook is called after the first ngDoCheck hook. This hook responds after the content gets projected inside the component.
 		6) ngAfterContentChecked : This hook is called after ngAfterContentInit and every subsequent ngDoCheck. It responds after the projected content is checked.
-		7) ngAfterViewInit : This hook is called after a component's view or initializing a child component's view.
-		8) ngAfterViewChecked : This hook is called after ngAfterViewInit. It responds after the component's view or when the child component's view is checked.
+		7) ngAfterViewInit       : This hook is called after a component's view or initializing a child component's view.
+		8) ngAfterViewChecked    : This hook is called after ngAfterViewInit. It responds after the component's view or when the child component's view is checked.
 		
 	2) ngOnInit : This is the second lifecycle hook. It is called once, after the ngOnChanges hook. It is used to initialize the component and sets the input 
 					properties of the component.
@@ -205,9 +206,6 @@
 		</nav>  
 		<router-outlet></router-outlet>  
 
-22) What do you understand by the RouterState?
-	The RouterState is a tree of activated routes. Every node in this tree knows about the "consumed" URL segments, the extracted parameters, and the resolved 
-	data. We can access the current RouterState from anywhere in the application by using the Router service and the routerState property.
 
 23)  What do you understand by the RouterState?
 	The RouterState is a tree of activated routes. Every node in this tree knows about the "consumed" URL segments, the extracted parameters, and the resolved 

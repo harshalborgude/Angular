@@ -1,0 +1,12 @@
+<div>
+    <p>The text you entered is : {{inputValue}}</p>
+    <ng-content></ng-content>
+</div>
+
+<div>
+    <input type="text" #demoInput>
+    <button (click)="setDemoInputValue(demoInput)">DemoSubmit</button>
+    <br>
+
+    <h4>demoInput value is : {{ demoInputValue }}</h4>
+</div>

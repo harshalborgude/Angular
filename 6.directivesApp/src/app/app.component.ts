@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = '6.directivesApp';
+
+  defaultColor:string="";
+  highlighColor:string ="red";
+
+
+
+
+
+
 }

@@ -4,7 +4,7 @@ Custome Property Bindings :
 - We can pass data from component class to view template and vice a versa using property binding, string interpolation and event binding.
 - We can also pass data from parent component to child component and vice versa , We use @Input decorator and @Output decorator.
     @Input - data from "parent component" => "child component". : input to child
-    @Output - data from "child component" => "parent component". : output from chile
+    @Output - data from "child component" => "parent component". : output from child
 - As we can bind custom properties , so it is called as "custom property binding"
 
 

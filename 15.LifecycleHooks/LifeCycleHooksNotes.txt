@@ -2,8 +2,16 @@
 
 
 - once new component class instantiated , angular component goes through diff phases called angular lifecycle hooks.
+- Projected Content : it is that HTML content which replaces the <ng-content> directive in child component.
+- Input bound properties : These are those properties of a component class which are decorated with @Input()
+	decorator.
+- Life cycle of component begins, when angular creates the component class. First method that gets invoked is class constructor.	
+- constructor is neither a lifecycle hook nor it is specific to Angular. It is a javaScript feature.It is a method which gets 
+	invoked, when a class is created. Angular make use of constructor to inject dependencies.
+- When constructor is called , at that point , none of the components input properties are updated and available to use.
+	Neither it's child components are constructed. Projected contents are also not available.	
 
-1) ngOnChanges 
+1) ngOnChanges() : 
 	- It is executed right at start,when a new component is created.
 	- and it is also get executed whenever one of the bound input property changes
 	- angular invokes ngOnChanges hook whenever any data-bound input property of the component or directive changes.
@@ -14,7 +22,7 @@
 		change detection cycle.
 	- This hook is not raised if change detection does not detect any changes.
 
-2) ngOnInit : 
+2) ngOnInit() : 
 	- Angular raises ngOnInit hook , after it creates the component and update its input properties.
 	- This hook is fired only once and immediately after its creation- during first change detection.
 	- This is the perfect place where you want to add any initialization logic to component.
@@ -24,7 +32,7 @@
 		this point. Hence any property we decorate with @ViewChild, @ViewChildren, @ContentChild & @ContentChildren 
 		will not be available to use
 
-3) ngDoCheck :
+3) ngDoCheck():
 	- this hook is invoked in every change detection cycle , even there is no change in input bound properties.
 	- ex ngDoCheck will run if you click a button on the webpage which does not change anything , But still it's an event.
 	- ngDoCheck get invoked after ngOnChanges and ngOnInit hooks.
@@ -33,15 +41,28 @@
 
 4) ngAfterContentInit : (component only hook - not applicable on directives )
 	- this get called after the component's projected content has been fully initialized.
+	- Angular also updated the properties decorated with the @ContentChild and @ContentChildren before raising this hook.
+		This hook is also raised, event if there is no content to project.
+	- The content here refers to the external content injected from the parent component via "Content Projection".
+	- Angular components can include the ng-content element,which acts as a placeholder for the content from the parent.
+	- This hook gets called only during first change detection cycle only.
+
 5) ngAfterContentChecked : (component only hook - not applicable on directives )
 	- it gets called during every change detection cycle after angular finished checking of component's projected content.
-	- this hook is very similar as ngAfterContentInit, both this hook is get called when external content(projected content) is initialized , checked and updated.
+	- Angular also updates properties decorated with the @ContentChild and @ContentChildren before raising this hook.
+	- Angular calls this hook event if there is not projected content in the component.
+	- this hook is very similar as ngAfterContentInit, both this hook is get called when external content(projected content) is initialized , 
+		checked and updated.
 	- it is raised after every change detection cycle.
 
 6) ngAfterViewInit :
-	- this get called after component's view and childs view are fully initialized. angular also updated properties with @ViewChild and @ViewChildren properties before this hook.
+	- this get called after component's view and childs view are fully initialized. angular also updated properties with @ViewChild and 
+		@ViewChildren properties before this hook.
 	- view refers view template of current component and its child components and directives
-	- its called during first change detection cycle
+	- its called during first change detection cycle, where angular initiazes the view for the first time.
+	- At this point , all the lifecycle hook method and change detection of all child components & directives are processed & component is 
+		completly ready.
+	- - This hook gets called only during first change detection cycle only.
 	
 7) ngAfterViewChecked :
 	- this view triggers when it checks and updates components view and childs view.
@@ -51,3 +72,62 @@
 	- its great place to do some cleanup work , it gets called right before the object get destroyed.
 	- unsubscribe observables , detached eventHandlers to avoid memory leaks .
 	- last lifecycle hook of the component and directives.
+
+
+===================================================================================================================
+
+1) Constructor() :
+		- However time we add child component in parent html file , that many times constructor will called and component 
+			will be added in DOM.
+		- by the time constructor called , input binded properties (inputValue) are not initialized with binded input values.
+		- inputValue property will be there, will have it's predefined value ,  but the value coming from parent component 
+			will not be assigned to inputValue property.
+
+2) ngOnChanges() :
+		- We can implement "OnChanges" interface for using "ngOnChanges" , its not mandatory but it's a good practice.
+		- only hook which takes argument of type "SimpleChanges"
+		- gets called after constructor.
+		- SimpleChanges var logs input properties and there currentValue , previousValue and firstChange : true/false
+		- ngOnChanges will get called when input bound proeprty chages,if change in previousValue and currentValue.Otherwise it will not called,
+
+3) ngOnInit() :
+		- ngOnInit get called after constructor called.
+		- the input bound property (InputValue) was not initialized, but by the time ngOnInit get called , Those input bound
+			properties have been initialized with the value from app component (parent component).
+		- So ngOnInit is the perfect place to add any initialization logic.
+
+4) ngDoCheck() :
+		- can import DoCheck interface (Optional)
+		- whenever there is any change then ngDoCheck will get called.
+		- ngDoCheck get called for every change detection cycle.
+
+5) ngAfterContentInit() :
+		- can import "AfterContentInit" (optional)
+		- When projected content is initialized then ngAfterContentInit get's called,
+		- projected content means content of <ng-content></ng-content> from parent component.
+		- It will only get called during first change detection cycle.After that will not get called.
+
+6) ngAfterContentChecked() :
+		- can import "AfterContentChecked" (optional)
+		- ngAfterContentChecked get's called for each change detection cycle.
+		- Also get called when projected content changes (<ng-content></ng-content>).
+
+7) ngAfterViewInit() :
+		- can import "AfterViewInit" (optional)
+		- get called when it's view and child's view get's fully initialized.
+		- Get called only once during the first change detection cycle.
+
+8) ngAfterViewChecked() :
+		- can import "AfterViewChecked" (optional)
+		- get's called for every change detection cycle.
+		- It get's called for the every change in the view.
+
+9) ngOnDestroy() :
+		- can import "OnDestroy" (optional)
+		- When demo component will be removed from DOM based on the *ngIf="showDemoComp" condition in app compnent,
+		- then this ngOnDestroy method will get called.
+		- this is the best place to do some cleanup work. 
+
+
+
+

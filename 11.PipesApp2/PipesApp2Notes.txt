@@ -17,7 +17,7 @@ Pipes : https://angular.io/api?query=pipe
         4) CurrencyPipe : Transforms a number to a currency string , formatted according to a locale rule.
                         {{ 1234.3 | currency:'CAD' }} -> CA$1,234.3
                         code , symbol , symbol-narrow are the secondary pipes.
-        5) Decimal Pipe : Transforms a number into a string with a decimal point , formatted according to locale rule.
+        5) number Pipe : Transforms a number into a string with a decimal point , formatted according to locale rule.
                         {{ 3.141324324 | number:'3.1-2' }} -> 003.14
                         {{ 3.141324324 | number:'1.4-4' }} -> 3.1413
                         -2 means 2 decimals

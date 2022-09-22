@@ -11,6 +11,11 @@ import { NgforComponent } from './ngfor/ngfor.component';
 import { NgforobjectComponent } from './ngforobject/ngforobject.component';
 import { ViewChildDecoratorComponent } from './view-child-decorator/view-child-decorator.component';
 import { DemoForViewChildComponent } from './demo-for-view-child/demo-for-view-child.component';
+import { setBackground } from './customDirectives/setBackground.directive';
+import { HighLightDirective } from './customDirectives/high-light.directive';
+import { HoverDirective } from './customDirectives/hover.directive';
+import { BetterhighlightDirective } from './customDirectives/betterhighlight.directive';
+import { ClassDirective } from './customDirectives/class.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,12 @@ import { DemoForViewChildComponent } from './demo-for-view-child/demo-for-view-c
     NgforComponent,
     NgforobjectComponent,
     ViewChildDecoratorComponent,
-    DemoForViewChildComponent
+    DemoForViewChildComponent,
+    setBackground,
+    HighLightDirective,
+    HoverDirective,
+    BetterhighlightDirective,
+    ClassDirective
   ],
   imports: [
     BrowserModule
