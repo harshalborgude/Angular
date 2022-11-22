@@ -1,3 +1,8 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 Routing in angular    : import { RouterModule, Routes } from '@angular/router';
 -----------------------------------------------------
@@ -8,8 +13,10 @@ Routing in angular    : import { RouterModule, Routes } from '@angular/router';
         ]
 
 3) Import RouterModule,Routes from @angular/router. -> (import { RouterModule, Routes } from '@angular/router';)
-4) in imports of RouterModule , call "RouterModule.forRoot(appRoute)" method with "appRoute" const , so using this now our application knows about all the routes using this.
-5) Instead components selectors in "app.component.html" file use "<router-outlet></router-outlet>" this directive. (this directive is of ROuterModule so its already imported in app.module)
+4) in imports of RouterModule , call "RouterModule.forRoot(appRoute)" method with "appRoute" const , so using this now our application knows 
+    about all the routes using this.
+5) Instead components selectors in "app.component.html" file use "<router-outlet></router-outlet>" this directive. (this directive is of 
+    ROuterModule so its already imported in app.module)
 6) So now with "http://localhost:4200/Home" this url it will "show home page", and same for "/Contact","/Course","/About"
 7) With this "http://localhost:4200/" only navigation tabs getting displayed , No any page is there so , in appRoute const , have to add 1 route for root route so,
     {path:"",component:HomeComponent}
@@ -19,7 +26,7 @@ Routing in angular    : import { RouterModule, Routes } from '@angular/router';
      {path:"",redirectTo:"Home",pathMatch:'full'},
     - This is the another way of routing to Default "Home" path.
     - So with this approach , when we try to get root url , we will redirected to "/Home"
-8) To handle error we have to add wildcard routes .
+8) To handle error we have to add wildcard routes.
         {path:"**",component: ErrorComponent}  -> "app.module.ts"
     - This is called as wildcard routes.This is the default route , if not matches with any other route.
     - wildcard route should always be the last route in route list, bcz this matches every route path.
@@ -30,7 +37,7 @@ Routing in angular    : import { RouterModule, Routes } from '@angular/router';
 
 
 ==========================================================================================================================
-navigation Link for Router : "routeLink"
+navigation Link for Router : "routerLink"
 
     1) Instead of "href" for routing to another page  , we should be using "routerLink"
         <li><a routerLink="Home">Home</a></li>
@@ -58,15 +65,244 @@ navigation Link for Router : "routeLink"
 
         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}"><a routerLink="">Home</a></li>
 
-    - 
+
+==============================================================================================================================
+ Absolute and Relative Route Paths : (about.component.ts)
+
+    - [routerLink]="/About" - So here "/About" is there before About so this is called as "Absolute Path" , here it will get appended
+        to root url like :- http://localhost:4200/About 
+    -  But if we don't specify "/" => "About" then it will use a "Relative Path" , means the specified path will get appended to currently 
+        active path.
+    - If Instead of "/About" we are using "./About" then it will be considered as "Relative Path" only.
+    - If we specified "../About" then it will move one level up of the current path to check the route. 
+
+        Case 1:
+        <!-- This "'/Home'" will make it as "absolute path" , will be appended to base url -->
+        <!-- http://localhost:4200/Home -->
+        <a [routerLink]="'/Home'">Go To HomePage ( /Home => http://localhost:4200/Home )</a><br>
+
+        Case 2:
+        <!-- When we use "'./Home'" then it will be considered as "Relative Path" , path will be appended to curent url-->
+        <!-- http://localhost:4200/About/Home -->
+        <a [routerLink]="'./Home'">Go To HomePage ( ./Home => http://localhost:4200/About/Home )</a><br>
+
+        Case 3:
+        <!-- When we use "../Home'" the it will move 1 level up of current path and will append it -->
+        <!-- Current path : http://localhost:4200/About -->
+        <!-- After CLick : http://localhost:4200/Home -->
+        <a [routerLink]="'../Home'">Go To HomePage ( ../Home => http://localhost:4200/Home )</a><br>
+
+        Case 4:
+        <!-- When we use "../../Home'" the it will move 2 level up of current path and will append it -->
+        <!-- Current path : http://localhost:4200/About/Info -->
+        <!-- After CLick : http://localhost:4200/Home -->
+        <!-- Invalid here -->
+        <a [routerLink]="'../Home'">Go To HomePage ( ../../Home : http://localhost:4200/About/Info => http://localhost:4200/ )</a>
 
 
+====================================================================================================================
+ Navigating Between Routes programatically : (about.component.ts)
+ 
+                import { ActivatedRoute,Route } from '@angular/router'; 
+    - We can navigate programatically using instance of "Router"
+
+         constructor(private router:Router, private activatedRoute:ActivatedRoute) { }
+        navigateToHome(){
+            this.router.navigate(['Home']);
+                or
+            this.router.navigateByUrl("Home");
+                or 
+            this.router.navigate(['Home'],{relativeTo:this.activatedRoute});
+        }
+        - So this way we will be navigated to "Home" page on execution of this method.
+    
+    - using "router.navigate(['Home'])" we can pass path and will route to that path. 
+    - using "router.navigateByUrl('Home')" we can pass string and will be navigated to that page.
+    - This "navigate" method or "navigateByUrl" always uses "Absolute" path unless we have provided starting path.
+    - If we want to route to relative path using router.navigate() method then ,we have to get current route path.
+    - To get current activated route , We need instance of "activatedRoute" and using this we can get current route.   
+    - So by using above line , "Home" will be appended to current active route , and it becomes relative route.
+
+        this.route.navigate(['Home'],{relativeTo:this.activatedRoute});
+        curent url : http://localhost:4200/About
+        later url  : http://localhost:4200/About/Home
 
 
+====================================================================================================================
+ Passing paramters to route : (about.component.ts)
+
+    - From Course component we want to get perticular course's details,and want to show in this path
+        http://localhost:4200/Courses/course/101
+    
+        - so here 101 is dynamic thing and can change , it should show that perticular courses details.
+    - We will have to add new route in routes in route list of app.module
+        To make id as variable we have to add ":" befor id like ":id" 
+
+        #app.module.ts
+        {path:"/Courses/course/:id",component:CourseComponent}
+
+        - here this id acts as a placeholder.
+        - "CourseComponent" is a child component of "CoursesComponent"
+        - we can provide multiple paramters using "/:" only.
+
+        {path:"/Courses/course/:id/:name/:surname",component:CoursesComponent}
+
+    - "Course" is the child component of "Courses" which is under courses folder.
+    - So using router.navigate() we can route to above given path.
+
+        this.router.navigate(['Course/'+this.id],{relativeTo:this.activatedRoute})
+            or 
+        <button routerLink="/Courses/Course/{{ id }}">Check Course Details using routerLink</button>
+
+        - 1st is routing programatically, and 2nd routing through template.
+    - Here id is the variable value and will be added to route link.So url will become : 
+        http://localhost:4200/Courses/Course/101    ( http://localhost:4200/Courses - relative path )
+    
+    - to access "id" from url we need to access current activated path using "ActivatedRoute"
+        this.courseId = this.activatedRoute.snapshot.paramMap.get('id');
+        - and can assign this value of "id" to any paramter and in template we can bind that property to show details
+    
+====================================================================================================================
+
+ Observables to retrieve route paramters : 
+
+    - Whenever we use "this.activatedRoute.snapshot.paramMap.get('id')" to retrive the parameter , this might create 
+        problem , Because we are using it in ngOnInit() method , so it will executed only once.
+    - So if we are in course component itself and just changing ID , so as it's getting assigned in ngOnInit , so 
+        reassigning will not happen.
+    - So the same "activatedRoute" also return Observable , using that also we can retrieve parameters
+        
+        this.activatedRoute.paramMap.subscribe((param)=>{
+            this.courseId = param.get('id');
+        })
+
+    - Here the diff is , we were using "paramMap.get()" on "snapshot" method, but now we are using "paramMap.get()"
+        directly on "activatedRoute" itself, that returns a Observable and we can get that id's value from there.
+    - So in this way , Whenever value of id changes , "paramMap" will emmit new value , and as we have subscribed
+        to it , it will get assigned to our parameter. And that component will be shown in template.
+    - So Whenever value of path parameter is changing , we should use paramMap Observable to retrive that value ,
+        but if that path value is not changing over time , we can retrieve that value normally using ,
+            this.activatedRoute.snapshot.paramMap.get('id');
 
 
+====================================================================================================================
 
+ Passing Query parameters to Route : 
 
+    Route parameters : https://url/id
+    Query parameters : https://url/?name=harshal&&sirname=borgude
 
+    - So route parameter is part of url and its mandatory to provide that , but in case of query parameter ,we can 
+        provide that using question marks , And query parameters are optinal paramters.
+    - We can pass query parameters same as routerLink 
 
+        <button [routerLink]="['/courses/course','course.id']" [queryParams]="{editMode:true}" > Edit </button> 
+            
+    - So when we add [queryParams] in button tag , then upon clicking this button , those query parameters will be 
+        added in url , So url becomes like below , we can retreive that value from url's query params. and can use 
+        that for our purpose.
+        
+        http://localhost:4200/Courses/Course/103?editMode=true
 
+    - We can pass this queryParams through router also , using program also we can pass a query parameter
+
+        this.router.navigate(['/Courses/course',this.courseId],{queryParams: {edit:true}})
+
+    * retreive Query parameter value from route :
+
+        // Getting query param with snapshot property 
+        this.editMode = this.activatedRoute.snapshot.QueryParamMap.get('edit');
+
+        // Getting query param with observable , so each change can be detected.
+        this.activatedRoute.QueryParamMap.subscribe((param)=>{
+            this.courseId = param.get('edit');
+        })
+
+====================================================================================================================
+
+ Passing Fragment To Route : 
+
+    - A Fragment in url is a link which jumps to a section or a content in HTML page which contains the ID mentioned 
+        in the Fragment.
+    - A Fragment comes after "#" sign. below "service" is a Fragment.
+        localhost:4200/products#service
+
+    - As in pages , we display view of each tag as different pages , so in Fragments , we display view of all tabs in
+        single page , and upon clicking on 1 tab, it jumps to that Fragment.(Scroll downs to that content)
+
+    - To make fragments , we have to remove <router-outlet> and "routerLink" also , so it will not assign any url 
+        path, so navigation pages will not work.
+    - Then all "routeLink" we have to assign as blank , so it will be root url only.
+    - Now to make it fragment , we have to give "fragment" directive. with values of id , and those id we have to assign
+        to selectors of that component.
+
+        <li routerLinkActive="active"><a routerLink="" fragment="About">About</a></li>
+
+        <app-about id="About"></app-about>
+    
+    - when we click on "About" tab , It will append that fragment name to url, like 
+        http://localhost:4200/#About
+    - In app component we can access that fragment name using "ActivatedRoute" , in that fragment returns a observable
+        this.activatedRoute.fragment.subscribe((value)=>{
+            console.log(value);
+            this.jumpTo(value);
+        })
+
+    - Now when we will click on that tab, we should scroll down to that component , that we can do using method 
+        execution on click.
+        jumpTo(section:any){
+            document.getElementById(section)?.scrollIntoView({behavior:'smooth'});
+        }
+
+    - So upon execution of this "jumpTo" method , it will scroll down to that component.
+
+=====================================================================================================================
+
+ Child Routes :
+
+    - Instead defining all the child routes in "Routes" object , we can provide child routes as a children array of
+        all child routes.
+    
+        // {path:"Courses/Course/:id",component:CourseComponent},
+        {path: "Courses",children:[
+            {path:"Course/:id",component:CourseComponent}
+        ]},
+    
+    - So whenever "/Course/id" will be appended to "Courses" , it will show provided component.So indirectly path 
+        becomes : http://localhost:4200/Courses/Course/101
+    - But to render child components properly ,We need to add "router-outlet" placeholder at the end of parent component.
+
+=====================================================================================================================
+
+ Route module file :
+
+    - When we have more routes , then it's always recommended to create separate module file for routes.For that we 
+        can follow below steps.
+    - Create anoter file for routing - "app-routing.module.ts"
+    - In that file , create "routes" constant with all routing paths 
+    - and export a class that should be decorated with "@NgModule" with imports of "RouterModule.forRoot(routes)"
+        and exports of "RouterModule".
+    
+        const routes: Routes =[
+            {path:"",component:HomeComponent}
+        ];
+
+        @NgModule({
+        imports: [RouterModule.forRoot(routes)],
+        exports: [RouterModule]
+        })
+        export class AppRoutingModule { }
+
+    - After exporting "RouterModule" we should also import this routing specific class in our "app.module" file.
+    
+        @NgModule({
+        declarations: [
+            AppComponent,
+        ],
+        imports: [
+            AppRoutingModule
+        ],
+        providers: [],
+        bootstrap: [AppComponent]
+        })
+        export class AppModule { }

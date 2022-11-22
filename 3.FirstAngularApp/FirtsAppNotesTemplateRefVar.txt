@@ -42,10 +42,10 @@
     - @ViewChild is used to access html element, component or directives from html view template to a component class.
     - @ViewChild property is of "ElementRef" type.
 
-         @ViewChild('dobInput') dateOfBirth:ElementRef
+         @ViewChild('dobInput') dateOfBirth:ElementRef;
 
     - "dateOfBirth" is local reference variable.
-    - now "dateOfBirth" refers to "dobInput" local refernce variable.It is of Tipe type of "ElementRef".
+    - now "dateOfBirth" refers to "dobInput" local refernce variable.It is of Type type of "ElementRef".
     - When we click on "dateOfBirth" input, then "focus" event happens , 
     - when we click outside date , then "blur" event happends. 
     - ElementRef have property inside it i.e "nativeElement" and inside native element we can get actual element.
@@ -97,7 +97,7 @@
 ====================================================================================================================
  View Encapsulation : 
 
-    - The View Encapsulation us a concept or behaviour in angular, where component CSS styles are Encapsulated into the 
+    - The View Encapsulation is a concept or behaviour in angular, where component CSS styles are Encapsulated into the 
         components view and do not affect the rest of the application.
     - Css file of app component will be applied only on html file of app component , will not applied on child components.
         This is called as view Encapsulation in angular
@@ -128,9 +128,10 @@
 ================================================================================================================================================
  ng-content : content projection
 
-    - The ng-content is used when we want to insert the content dynamically inside the component,that helps to increase component reusability.
-    - Using ng-content we can pass content inside the component selector and when angular parses that content that appears at the place of 
-        ng-content.
+    - The ng-content is used when we want to insert the content dynamically inside the component,that helps to 
+        increase component reusability.
+    - Using ng-content we can pass content inside the component selector and when angular parses that content that 
+        appears at the place of ng-content.
     
     - lets say we have app component and demo component.<app-demo> is tag of demo component.
     - app component can show information of 1 component, It will be having title , description and button.

@@ -8,7 +8,8 @@
     - By using data binding technique , we can send data from component class to template file and vice versa.
                             DataBinding
         Component class <---------------> Template
-    - If "component" is changed then "template" will change automatically , if "template" is changed then the "component" will be changed automatically.
+    - If "component" is changed then "template" will change automatically , if "template" is changed then the 
+        "component" will be changed automatically.
     - Data Bindings are four types :
         1) Interpolation 
         2) Property Binding

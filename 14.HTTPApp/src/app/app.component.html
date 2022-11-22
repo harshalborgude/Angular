@@ -18,7 +18,7 @@
           <label>Product Price</label> <br>
           <input type="text" name="price" ngModel> <br>
 
-          <input type="submit" value="Add Product">
+          <input type="submit" name="submit" value="{{ editMode ? 'Update Product' : 'Add Product' }}">
         </form>
       </div>
 
@@ -32,14 +32,29 @@
             <th>Description</th>
             <th>Price</th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>Laptop</td>
-            <td>A Lenove Laptop</td>
-            <td>$1210</td>
+          <tr *ngIf="allProducts.length<1 && !isFetching && !errorMessage">
+            <td colspan="5">No products available</td>
           </tr>
-            
+          <!-- If any error msg will be there, then it will be true -->
+          <tr *ngIf="errorMessage">
+            <td colspan="5">{{ errorMessage }}</td>
+          </tr>
+          <!-- errorMessage is null,means its false -->
+          <tr *ngIf="isFetching && !errorMessage">
+            <td colspan="5">Loading...</td>
+          </tr>
+          <tr *ngFor="let product of allProducts; index as i">
+            <td>{{ i+1 }}</td>
+            <td>{{ product.pname }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td><button (click)="onEdit(product)">Edit</button></td>
+            <td><button (click)="OnDelete(product)">Delete</button></td>
+          </tr>
         </table>
+        <hr>
+        <button (click)="fetchProducts()">Fetch Products</button>
+        <button (click)="deleteAll()">Clear Products</button>
       </div>
 
     </div>

@@ -20,7 +20,7 @@ Pipes : https://angular.io/api?query=pipe
         5) number Pipe : Transforms a number into a string with a decimal point , formatted according to locale rule.
                         {{ 3.141324324 | number:'3.1-2' }} -> 003.14
                         {{ 3.141324324 | number:'1.4-4' }} -> 3.1413
-                        -2 means 2 decimals
+                        - 2.1-2 means 2 digits and 1min and 2 max decimal places. 
         6) PercentPipe : Transforms a number to a Percentage string , formatted according to locale rule.
                         {{ 0.1213478 | Percent }} -> 12.134%
                         {{ 0.1213478 | Percent: '2.1-2' }} -> 12.14%
@@ -115,7 +115,6 @@ Impure Pipe :
         - as pure pipe will not detect changes , so will not work properly.
         - and impure pipe will do sort and filter operation on every change detection cycle.
     - So filtering and sorting logic we have to move in component itself , instead of using pipes.
-
 
 =====================================================================================================================
 Filtering Data : 

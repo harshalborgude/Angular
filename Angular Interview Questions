@@ -10,11 +10,11 @@
 	- Angular supports two-way data-binding.
 	- It provides support for dependency injection.
 	- implementing routing is easy in angular.
+	- It facilitates you to add a custom directive.
 	- It also supports RESTfull services.
 	- Validations are supported in Angular.
 	- It follows MVC pattern architecture.
 	- It supports static templates and Angular template.
-	- It facilitates you to add a custom directive.
 	- Angular provides client and server communication.
 	- It provides powerful features like Event Handlers, Animation, etc.
 	

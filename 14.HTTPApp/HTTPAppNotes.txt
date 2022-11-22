@@ -36,11 +36,131 @@ firebase URL : https://angularbackendhrb-default-rtdb.firebaseio.com/
 ===================================================================================================================
 * GET request :
 
+    - this.http.get<Retun Type>(URL,header?);
+    - get method will return observable , have to subscribe it and have to get the data.
+    - after getting response of get url, we can use pipe and map to transform the data as we wanted.
+
+    his.http.get(
+        'https://angularbackendhrb-default-rtdb.firebaseio.com/products.json',
+        {headers:headers})
+      .subscribe((response)=>{
+        console.log("response :"+response);
+      });
+
+====================================================================================================================
+ * DELETE request :
+
+  - this.http.delete(URL)
+
+  - URL : 'https://angularbackendhrb-default-rtdb.firebaseio.com/products/{id}.json"
+  - here by using id we are deleting that perticular product.
+  - we have to subscribe that observable return by delete method.
+
+  - URL : 'https://angularbackendhrb-default-rtdb.firebaseio.com/products.json"
+  - by hitting this URL with delete method, all products will be deleted.
+
+  - Here we are making http request from component class , but always it's good practice to make request from service 
+    class and access that service in component class.
 
 
+======================================================================================================================
+ * PUT request : Update values.
+
+    - To edit the product , we will use onEdit method and will make PUT request with the same id.
+    - Upon "Edit" button clicked , we will call "onEdit" method with the details of that specific product.
+    - Have created below 3 properties to implement "Update" functionality.
+        editMode: boolean = false;
+        currentProductId:string ="";
+        @ViewChild("productsForm") form:NgForm;
+    - Here @ViewChild("productsForm") will get the details of form using local reference var and we can manipulate 
+        that form now by using "form.setValue". inside setValue we have to pass object with key and values,kwy
+        key are names of the forms.
+    - Have created "editMode" property which is false by default.if its false button value will be "Add product"
+        nd if its true , button value will be "Update Product"
+    - On clicking same button , both will call "onProductCreate()" only, we have to differentiate both request
+        based on value of "editMode" property.And if its true , we can call service to updateProduct with the id.
+        also have to store id of the product while edit button cliked.
+    
+    - this.http.put('https://angularbackendhrb-default-rtdb.firebaseio.com/products/'+id+'.json',
+                     products,
+                    {headers:headers})
+                .subscribe((response)=>{
+                    console.log("response :"+response);
+                });
 
 
+=====================================================================================================================
+Handling Errors in HTTP request :
 
+    * Subscribing in component class to handle error :
+    - If we are subscribing Observable in component class then can get the error in second call back function,and can
+        assign it to any error message property , and we can show that error in template based on condition.
+        http.get(URI)
+            .subscribe((value)=>{
+                // logic if we get any response
+            },(error)=>{
+                // logic to handle error
+                this.errorMessage = error.message;
+            })
+    
+    * Subscribing in service class to handle error :
+    - If we have subscribed Observable in service class then to display message in component class, we can use Subject(rxjs)
+        // Service class
+        errorObservable = new Subject();
+        
+        http.post(URI,Body,Headers)
+            .subscribe((value)=>{
+                // process response
+            },(error)=>{
+                errorObservable.next(error.message);
+                // this emitted message we can get in component by subscribing this subject Observable.
+        })
+
+        // component class
+        errorSubscription : Subscription;
+        ngOnInit(){
+            this.errorSubscription = this.service.errorObservable.subscribe((errMsg)=>{
+                this.errorMessage = errMsg;
+            })
+        }
+    - This errorMessage we can display in template wherever we want.
+    - This subscribtion we have to unsubscribe in ngOnDestroy() method.
+
+        ngOnDestroy(){
+            this.errorSubscription.unsubscribe();
+        }
+
+    * We can also use cathError() methods to catch error, as have done in "fetchProduct" service method.
+
+
+============================================================================================================
+ Headers and Query Parameters in HTTP request :
+    
+    - We can create headers using new Headers({}) , and this object we have to add as a last argument of any 
+        http request.
+
+        const header = new Headers({'content-type':'application/json','header2':'value'});
+                            OR 
+        const header = new HttpHeaders().set('content-type','application/json')
+                                        .set('header2','value');
+                            OR
+        const header = new HttpHeaders();
+        header = header.append('content-type','application/json')
+        header = header.append('header2','value');
+
+    - using this chain of set methods, we can add number of headers.
+        http.get( URI , {'header':header} )
+
+    - Except our added headers, other lot of headers will be there set by either angular or browser.
+
+    * Query Parameters : URI?name=harsh
+    - So in URI after question mark , whatever part is there called as queryParam.
+    
+        const params = new HttpParams().set('name','harsh');
+        http.get( URI , {'header':header, 'params':params } )
+
+    - Query params (HTTP Param) we can see inside "payload" tab of inspect.And Headers we can see in request headers.
+    
 
 
 

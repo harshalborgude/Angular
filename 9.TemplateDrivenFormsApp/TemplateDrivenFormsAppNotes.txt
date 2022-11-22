@@ -5,7 +5,7 @@ Forms : Refer "example1" component
 	- Login Form
 	- Registration Form
 	- Forgot Password Form
-	- Seach Form 
+	- Search Form 
 	- Update Profile etc...
 
 -> using angular we can develop forms in 2 ways 

@@ -37,7 +37,7 @@
     * Binding Directive Properties :
     - We can bind those directive properties with @Input() decorator so we can bind that with component file.
     - here "defaultColor" and "highlighColor" have binded in app.html file , there we can provide strings directly or we 
-        can bind bind with other properties of app.ts file.
+        can bind with other properties of app.ts file.
     
     - "appBetterhighlight" this selector name is used in template file to implement that directive.But we can also 
         bind any perticular property of that directive so that selector we can bind inside [appBetterhighlight] and 
@@ -69,6 +69,9 @@ Custome appClass (ngClass) Directive : class.directive.ts
         this display method will now accept parameters as object. and we can bind that property in template file
         and can send object to binded method.
             <div appClass [display]="{container:true , 'change-font':true }">
+    
+    - When we use "set" keyword before property then we can use that property as a method, and can write some logic
+        inside it's braces to set it's value.
 
             @Input() set display(value:Object){
                 let entries = Object.entries(value);
@@ -95,13 +98,46 @@ Custome appClass (ngClass) Directive : class.directive.ts
     - Other option is to name that class of directive same as directive selector name , then also we can bind that 
         directive like [ngClass]="" -> [appClass]="class:condition" 
 
-
-
-
-
 =====================================================================================================================
+Custome Structural Directive :
 
+    - To creatve Custome Structural directive, we have to receive that whole container where have to apply structural 
+        directive
+    - IN this case, we can use our custome structural directive same as ngIf and ngFor
+    - FOr that have to receive "templateRef" and "ViewContainer" reference in constructor of our custome directive.
+        "templateRef" will refer to the view on which custome structural directive have applied
+        "ViewContainer" will refere to the container in which view will be added or removed.
 
+        // appIf.directive.ts
+        @Directive({
+            selector: '[appIf]'
+        })
+        //1. what to add or removed.
+        //2. from where to add or remove.
+        export class IfDirective{
+
+            constructor(private template: TemplateRef<any>,private ViewContainer: ViewContainerRef){ }
+
+            @Input("appIf") set displayView(condition:boolean){
+                if(condition){
+                    // based on condition embedding "template" inside "ViewContainer".
+                    this.ViewContainer.createEmbeddedView(this.template); 
+                }else{
+                    this.ViewContainer.clear(this.template); 
+                }
+            } 
+        }
+        // appIf.component.ts
+            display:boolean = true;
+
+        // appIf.html
+            <div  *appIf="display">
+                <h1>header</h1>
+                <p> This is the paragraph </p>
+            </div>
+    
+    -  So appIf is a structural directive, upon calling it will check the property "displayView" who has alias name 
+        "appIf" and based on condition receive it will embedd or clear template.
 
 
 

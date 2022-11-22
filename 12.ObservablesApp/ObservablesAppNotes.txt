@@ -54,9 +54,6 @@
 8) If we subscribe observable again and again , then it will return another "Observable" and those will run parallely.
     So it is very important to unsubscibe observable when we dont need it.
 
-
-
-
 ====================================================================================================================
 Different Ways of creating Observables :
 
@@ -69,10 +66,10 @@ Different Ways of creating Observables :
     
     myObservable = of( this.array1, this.array2, 20, 79, "Hello");
 
-4) 4) Creating Observable Using "from()" :
+4) Creating Observable Using "from()" :
 
     - from will accept only 1 arguments , 
-    - It iterates the over the iterable and emmits those values 1 by 1.
+    - It iterates over the iterable and emmits those values 1 by 1.
     - We can convert "Promise" to "Observable" using from operator.
 
     myObservable = from( this.array1);
@@ -83,10 +80,10 @@ Operators in Observables: ( map , filter )
 
 - Operators takes Observable as input and transform it into a new observable and return it.Operators are use to 
     manipulate the observable data stream.
-    ex : from() operator .
+    ex : from() operator.
 
 - To use Operators , have to import them from 'rxjs/operators', (import { map } from 'rxjs';)
-- map will use to transform the data , in single pipe we can use multiple operators - pipe(map()=>{},filter()=>{})
+- map will use to transform the data , in single pipe we can use multiple operators - pipe(map(()=>{}),filter(()=>{}))
 - so here "map" will return transformed observable and it will be input to another operator "filter".
 - operator will be applied in the given order.
 
@@ -106,7 +103,7 @@ Operators in Observables: ( map , filter )
         }));
 
 =================================================================================================================================================
-Subjects in rxjs :     ( import { Subject } from 'rxjs'; )
+ Subjects in rxjs :     ( import { Subject } from 'rxjs'; )
 
 - A Subject is a special type of Observable that allows values to be "multiCasted" to "many Observers".
 - Subjects are used for cross component communication , works same as eventEmitter as we had done previously.
@@ -118,7 +115,6 @@ Subjects in rxjs :     ( import { Subject } from 'rxjs'; )
     dataEmitter = new Subject<string>();
     onEvent(data:string){
         this.dataEmitter.next(data);
-        // this.dataEmitter.emit(data);
     }
 
 - So here input data to "onEvent()" method from 1 component will be emited .
@@ -141,6 +137,7 @@ Unsubscribe to Observable :
 - Interval function - It returns the count infinitely , used to check unsubscribe logic 
 - This will return a observable and it will keep returning data infinitely until we Unsubscribe it.
         counterObservable = interval(1000); 
+        counterUnsubscribe: Subscription;
 
         ngOnInit():void {
             this.counterUnsubscribe = this.counterObservable.subscribe((val)=>{
@@ -156,7 +153,7 @@ Unsubscribe to Observable :
 - If we subscribe observable again and again , then it will return another "Observable" and those will run parallely.
 - Observable is of type "Subscription"
 - Normally we can write "unsubscibe" method in "ngOnDestroy()" lifecycle method.
-- we can collect subscriptions in array of "Subscription" , And ca unsubscribe them in a loop in "ngOnDestroy" method. 
+- we can collect subscriptions in array of "Subscription" , And unsubscribe them in a loop in "ngOnDestroy" method. 
 
     subscriptions: Subscription[] = []
     this.subscriptions.push(this.subscription1$)

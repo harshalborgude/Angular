@@ -9,18 +9,23 @@ import { ContactComponent } from './contact/contact.component';
 import { CoursesComponent } from './courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
+import { CourseComponent } from './courses/course/course.component';
 
 
-const appRoute: Routes =[
-  {path:"",component:HomeComponent},
-  // {path:"",redirectTo:"Home",pathMatch:'full'},
-  {path:"Home",component: HomeComponent},
-  {path:"About",component: AboutComponent},
-  {path:"Contact",component: ContactComponent},
-  {path:"Courses",component: CoursesComponent},
-  {path:"**",component: ErrorComponent}
+// const appRoute: Routes =[
+//   {path:"",component:HomeComponent},
+//   // {path:"",redirectTo:"Home",pathMatch:'full'},
+//   {path:"Home",component: HomeComponent},
+//   {path:"About",component: AboutComponent},
+//   {path:"Contact",component: ContactComponent},
+//   {path:"Courses",component: CoursesComponent},
+//   // {path:"Courses/Course/:id",component:CourseComponent},
+//   {path: "Courses",children:[
+//     {path:"Course/:id",component:CourseComponent}
+//   ]},
+//   {path:"**",component: ErrorComponent}
 
-];
+// ];
 
 @NgModule({
   declarations: [
@@ -29,12 +34,13 @@ const appRoute: Routes =[
     ContactComponent,
     CoursesComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot(appRoute)
+    AppRoutingModule
+    // RouterModule.forRoot(appRoute)    // this thing have done in another file.
   ],
   providers: [],
   bootstrap: [AppComponent]

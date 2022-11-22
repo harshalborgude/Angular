@@ -1,1 +1,27 @@
 <h1>About Page!</h1>
+
+<!-- Navigating between routes programatically -->
+<button (click)="navigateToHome()">Go To homepage ( Navigating programatically on click event )</button><br><br><br>
+
+
+
+<!-- This "'/Home'" will make it as "absolute path" , will be appended to base url -->
+<!-- http://localhost:4200/Home -->
+<a [routerLink]="'/Home'">Go To HomePage ( /Home => http://localhost:4200/Home )</a><br><br>
+
+<!-- When we use "'./Home'" then it will be considered as "Relative Path" , path will be appended to curent url-->
+<!-- http://localhost:4200/About/Home -->
+<a [routerLink]="'./Home'">Go To HomePage ( ./Home => http://localhost:4200/About/Home )</a><br><br>
+
+<!-- When we use "../Home'" the it will move 1 level up of current path and will append it -->
+<!-- Current path : http://localhost:4200/About -->
+<!-- After CLick : http://localhost:4200/Home -->
+<a [routerLink]="'../Home'">Go To HomePage ( ../Home => http://localhost:4200/Home )</a><br><br>
+
+<!-- When we use "../../Home'" the it will move 2 level up of current path and will append it -->
+<!-- Current path : http://localhost:4200/About/Info -->
+<!-- After CLick : http://localhost:4200/Home -->
+<!-- Invalid here -->
+<a [routerLink]="'../Home'">Go To HomePage ( ../../Home : http://localhost:4200/About/Info => http://localhost:4200/ )</a>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

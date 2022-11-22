@@ -54,7 +54,6 @@ Directives :
 			   el.nativeElement.style.backgroundColor = "yellow";  
 			 }  
 			} 
-
             
 ------------------------------------------------------------------------------------------------------------
 
@@ -117,8 +116,9 @@ Directives :
 
 
 5) *ngSwitch : refer ngSwitch component 
-                - It is used to display perticular tag of of many tag based on matching case.Like switch case.
-                - property assigned to ngSwitch directive is binded using property binding , and ngSwicth will take value from component.
+                - It is used to display perticular tag of many tag based on matching case.Like switch case.
+                - property assigned to ngSwitch directive is binded using property binding , and ngSwicth will take 
+                    value from component.
                 - user two words ([ngSwicth]="property") and (*ngSwicthCase="'case'")
                 
                 Ex :
@@ -203,8 +203,8 @@ Renderer2 :
 
          @ViewChild('dobInput') dateOfBirth:ElementRef;
 
-    - "dateOfBirth" is local reference variable.
-    - now "dateOfBirth" refers to "dobInput" local refernce variable.It is of Tipe type of "ElementRef".
+    - "dobInput" is local reference variable.
+    - now "dateOfBirth" refers to "dobInput" local refernce variable.It is of type of "ElementRef".
     - When we click on "dateOfBirth" input, then "focus" event happens , 
     - when we click outside date , then "blur" event happends. 
     - ElementRef have property inside it i.e "nativeElement" and inside native element we can get actual element.

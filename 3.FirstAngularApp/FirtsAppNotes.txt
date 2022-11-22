@@ -4,7 +4,7 @@
 2) To start app : ng serve -> will start app on 4200 port : http//localhost:4200
     - to create component : ng generate component <component-name>
 
-3) When we create angular application , app compoenent will be created.
+3) When we create angular application , app compoenent will be created.'
 4) 'app-component' will be called as parent component in the application.
 5) Angular application execution will begin from app component only.
     files available in app component is :
@@ -144,6 +144,13 @@ Q. Syntax to create a component ?
         templateUrl : './app.component.html',
         styleUrls : ['./app.component.css']
     })
+    export class className{
+        property:dataType = value;
+        method(args) : returnType {
+            //logic
+        }
+    }
+
 
     -> 'selector' represents a tag which invokes the component.
     -> 'templateUrl' represents html file that has to be rendered , when component is invoked.
